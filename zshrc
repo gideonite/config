@@ -17,11 +17,16 @@ else
 fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 export PLY_HOME=~/ext/ply/dist/ply
 export PATH=~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:~/.rbenv/shims:$PATH
-
 typeset -U PATH
+
+export JAVA_HOME=/Library/Java/Home
+
+# cBio Portal Env Variables
+export PORTAL_HOME=~/dev/cbio-cancer-genomics-portal
+export CGDS_HOME=~/dev/cbio-cancer-genomics-portal/portal
+export CGDS_DATA_HOME=~/dev/cbio-cancer-genomics-portal/portal
 
 # }}}
 # Setopts {{{
@@ -113,6 +118,9 @@ alias mookmo='ssh jlewis@mookmo.net'
 alias sartak='ssh toft@sartak.org'
 alias sd='ssh jlewis@silenceisdefeat.com'
 alias yiff='ssh eidolos@yiff.mit.edu'
+
+alias saba='ssh dresdnerg@saba.cbio.mskcc.org'
+alias misodev='ssh dresdnerg@miso-dev.cbio.mskcc.org'
 # }}}
 # Games {{{
 alias cao='TERM=rxvt telnet crawl.akrasiac.org' # urxvt-color screws up

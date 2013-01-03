@@ -249,12 +249,16 @@ au BufRead,BufNewFile *.go set noexpandtab
 " Colors {{{
 "autocmd BufWinEnter * syn match EOLWS excludenl /[ \t]\+$/
 "highlight EOLWS      ctermbg=red
-highlight Pmenu      ctermfg=grey ctermbg=darkblue
-highlight PmenuSel   ctermfg=red  ctermbg=darkblue
-highlight PmenuSbar  ctermbg=cyan
-highlight PmenuThumb ctermfg=red
-highlight Folded     ctermbg=black ctermfg=darkgreen
-highlight Search     None          ctermfg=lightred
+" highlight Pmenu      ctermfg=grey ctermbg=darkblue
+" highlight PmenuSel   ctermfg=red  ctermbg=darkblue
+" highlight PmenuSbar  ctermbg=cyan
+" highlight PmenuThumb ctermfg=red
+" highlight Folded     ctermbg=black ctermfg=darkgreen
+" highlight Search     None          ctermfg=lightred
+
+syntax enable
+set background=dark
+colorscheme solarized
 
 let g:vimclojure#HighlightBuiltins = 1
 let g:vimclojure#HighlightContrib = 1
