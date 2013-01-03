@@ -19,7 +19,7 @@ export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 export PLY_HOME=~/ext/ply/dist/ply
-export PATH=~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:~/.rbenv/shims:$PATH
 
 typeset -U PATH
 
@@ -84,6 +84,7 @@ bindkey "^\\" pound-insert       # As an alternative to ctrl-c; will go in hist
 bindkey "\e[3~" delete-char      # Enable delete
 #bindkey "^Q" predict-off        # Disable sweet complete-as-you-type
 #bindkey "..." predict-on         # Enable sweet complete-as-you-type
+bindkey '^x^e' edit-command-line # edit commandline in vim
 
 # }}}
 # Aliases {{{
@@ -137,6 +138,11 @@ alias restartx='sleep 5; startx' # restarts X!
 alias tdA="todo -A"              # displays all todo items
 alias usage='du -hs *'           # nicely displays disk usage of items in pwd
 which htop>/dev/null && alias top='htop' # prettier version of top if it exists
+
+alias p='echo cd ~portal~; cd ~/dev/cbio-cancer-genomics-portal/portal'
+alias pjs="echo 'cd ~portal js~'; cd ~/dev/cbio-cancer-genomics-portal/portal/src/main/webapp/js/"
+alias lo="vim ~/mskcc/left_off.md"  # open left_off file
+alias loo="~/mskcc/render/render.sh ~/mskcc/left_off.md" # markdown left_off file
 # }}} 
 # Global shortcuts {{{
 alias -g ...='../..'             # Ease of going backward

@@ -137,6 +137,9 @@ vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 
 nmap `/ :nohl<CR>
 
+" kj exits insert mode
+inoremap kj <Esc>
+
 " }}}
 " Autocommands {{{
 " Jump to last known cursor position on file edit {{{
