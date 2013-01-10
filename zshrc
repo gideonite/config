@@ -147,7 +147,7 @@ alias tdA="todo -A"              # displays all todo items
 alias usage='du -hs *'           # nicely displays disk usage of items in pwd
 which htop>/dev/null && alias top='htop' # prettier version of top if it exists
 
-alias p='echo cd ~portal~; cd ~/dev/cbio-cancer-genomics-portal/portal'
+alias p='echo cd ~portal~; cd ~/dev/cbio-cancer-genomics-portal'
 alias pjs="echo 'cd ~portal js~'; cd ~/dev/cbio-cancer-genomics-portal/portal/src/main/webapp/js/"
 alias lo="vim ~/mskcc/left_off.md"  # open left_off file
 alias loo="~/mskcc/render/render.sh ~/mskcc/left_off.md" # markdown left_off file
