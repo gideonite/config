@@ -1,4 +1,5 @@
 " .vimrc by Jordan Lewis
+" and Gideon Dresdner
 "
 " Settings {{{
 " General {{{
@@ -82,6 +83,7 @@ set tildeop           " Turn ~ into an operator
 let g:EnhCommentifyBindInInsert = 'No' " No enhancedcommentify in insert mode
 let g:EnhCommentifyRespectIndent = 'Yes' " indent where I want you to indent
 set switchbuf=useopen " Jump to open window containing jump target if available
+set path=.,/usr/include,,** " recursively append everything in current directory for :find
 "}}}
 " Persistent undo {{{
 if exists("+undofile")
@@ -265,10 +267,15 @@ let g:vimclojure#HighlightContrib = 1
 let g:vimclojure#DynamicHighlighting = 1
 let g:vimclojure#FuzzyIndent = 1
 let g:vimclojure#ParenRainbow = 1
-let g:vimclojure#WantNailgun = 1
-let g:vimclojure#NailgunClient = "/usr/local/bin/ng"
+
+" let g:vimclojure#NailgunClient = "/usr/local/bin/ng"
+" let g:vimclojure#WantNailgun = 1
 
 let python_hilight_all=1
+
+" GitGutter
+highlight clear SignColumn
+let g:gitgutter_enabled = 0
 
 " Rainbowy parens, braces, and brackets thanks to Eidolos{{{
 let g:rainbow         = 1 " Must be a more compact way of setting all these
@@ -340,31 +347,31 @@ nmap <silent> dc :call <SID>diffstart('call append(0, split(s:vcs_orig(expand("#
 nmap <silent> de :call <SID>diffstop()<CR>
 " }}}
 " Nopaste {{{
-function s:nopaste(visual)
-    let nopaste_services = $NOPASTE_SERVICES
-    if &filetype == 'tex'
-        let $NOPASTE_SERVICES = "Mathbin ".$NOPASTE_SERVICES
-    endif
-
-    if a:visual
-        silent exe "normal gv!nopaste\<CR>"
-    else
-        let pos = getpos('.')
-        silent exe "normal gg!Gnopaste\<CR>"
-    endif
-    silent normal "+yy
-    let @* = @+
-    silent undo
-    if a:visual
-        normal gv
-    else
-        call setpos('.', pos)
-    endif
-    let $NOPASTE_SERVICES = nopaste_services
-    echo @+
-endfunction
-nmap <silent> \p :call <SID>nopaste(0)<CR>
-vmap <silent> \p :<C-U>call <SID>nopaste(1)<CR>
+" function s:nopaste(visual)
+"     let nopaste_services = $NOPASTE_SERVICES
+"     if &filetype == 'tex'
+"         let $NOPASTE_SERVICES = "Mathbin ".$NOPASTE_SERVICES
+"     endif
+" 
+"     if a:visual
+"         silent exe "normal gv!nopaste\<CR>"
+"     else
+"         let pos = getpos('.')
+"         silent exe "normal gg!Gnopaste\<CR>"
+"     endif
+"     silent normal "+yy
+"     let @* = @+
+"     silent undo
+"     if a:visual
+"         normal gv
+"     else
+"         call setpos('.', pos)
+"     endif
+"     let $NOPASTE_SERVICES = nopaste_services
+"     echo @+
+" endfunction
+" nmap <silent> \p :call <SID>nopaste(0)<CR>
+" vmap <silent> \p :<C-U>call <SID>nopaste(1)<CR>
 " }}}
 " SuperTab {{{
 let g:SuperTabMidWordCompletion = 0
