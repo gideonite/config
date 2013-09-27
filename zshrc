@@ -18,15 +18,18 @@ fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
 export PLY_HOME=~/ext/ply/dist/ply
-export PATH=~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:~/.rbenv/shims:$PATH
+export PATH=/usr/local/share/npm/bin/:~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:~/.rbenv/shims:$PATH
 typeset -U PATH
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export JAVA_HOME=/Library/Java/Home
 
 # cBio Portal Env Variables
-export PORTAL_HOME=~/dev/cbio-cancer-genomics-portal
-export CGDS_HOME=~/dev/cbio-cancer-genomics-portal/portal
-export CGDS_DATA_HOME=~/dev/cbio-cancer-genomics-portal/portal
+export PORTAL_HOME=~/dev/cbio-portal
+export CGDS_HOME=~/dev/cbio-portal/portal
+export CGDS_DATA_HOME=~/dev/cbio-portal/portal
+export PORTAL_DATA_HOME=~/dev/cbio-portal/portal-data
 
 # }}}
 # Setopts {{{
@@ -99,10 +102,14 @@ alias mkdir='nocorrect mkdir'  # Don't correct this cmd
 alias mv='nocorrect mv'        # Don't correct this cmd
 alias touch='nocorrect touch'  # Don't correct this cmd
 alias git='nocorrect git'
+alias sag='nocorrect sag'
+alias pstree='nocorrect pstree'
 alias sl='sl -l'               # ... dumb
 alias termcast='telnet 213.184.131.118 37331'   # noway.ratry.ru 37331
 alias slurp='wget -r --no-parent'
 alias deflac='for file in *.flac; do $(flac -cd "$file" | lame -V 0 --vbr-new - "${file%.flac}.mp3"); done'   # convert all flacs in directory to v0
+alias heroku='nocorrect heroku'
+alias mutt='nocorrect mutt'
 # }}}
 # Shells {{{
 alias bh='ssh root@bughouse.econnectix.com'
@@ -119,8 +126,11 @@ alias sartak='ssh toft@sartak.org'
 alias sd='ssh jlewis@silenceisdefeat.com'
 alias yiff='ssh eidolos@yiff.mit.edu'
 
+alias cbio='ssh dresdnerg@cbio.mskcc.org'
 alias saba='ssh dresdnerg@saba.cbio.mskcc.org'
 alias misodev='ssh dresdnerg@miso-dev.cbio.mskcc.org'
+alias miso='ssh dresdnerg@miso.cbio.mskcc.org'
+alias unagi='ssh dresdnerg@unagi.cbio.mskcc.org'
 # }}}
 # Games {{{
 alias cao='TERM=rxvt telnet crawl.akrasiac.org' # urxvt-color screws up
@@ -147,10 +157,14 @@ alias tdA="todo -A"              # displays all todo items
 alias usage='du -hs *'           # nicely displays disk usage of items in pwd
 which htop>/dev/null && alias top='htop' # prettier version of top if it exists
 
-alias p='echo cd ~portal~; cd ~/dev/cbio-cancer-genomics-portal'
-alias pjs="echo 'cd ~portal js~'; cd ~/dev/cbio-cancer-genomics-portal/portal/src/main/webapp/js/"
-alias lo="vim ~/mskcc/left_off.md"  # open left_off file
-alias loo="~/mskcc/render/render.sh ~/mskcc/left_off.md" # markdown left_off file
+alias p='echo cd ~portal~; cd ~/dev/cbio-portal'
+alias pjs='echo cd ~portaljs~; cd ~/dev/cbio-portal/portal/src/main/webapp/js'
+alias pf='echo cd ~peakflow~; cd ~/dev/peakflow/'
+alias locald="~/portal-deploy-scripts/local-deploy.sh"
+alias pp='vim /Users/dresdneg/dev/cbio-portal/src/main/resources/portal.properties'
+alias d="~/portal-deploy-scripts/deploy.sh"
+alias findn='find . -name'
+alias pw='echo "cd ~portal/webapp~"; cd ~/dev/cbio-portal/portal/src/main/webapp'
 # }}} 
 # Global shortcuts {{{
 alias -g ...='../..'             # Ease of going backward
