@@ -15,7 +15,8 @@ zsh \
 zshenv \
 zshprompt \
 zshrc \
-ackrc
+ackrc \
+hgrc
 
 # The names of the pathogen bundles we want to install. These are kept as
 # submodules in vim/bundle/, and are updated when we install.

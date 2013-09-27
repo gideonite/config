@@ -104,6 +104,7 @@ alias touch='nocorrect touch'  # Don't correct this cmd
 alias git='nocorrect git'
 alias sag='nocorrect sag'
 alias pstree='nocorrect pstree'
+alias hg='nocorrect hg'
 alias sl='sl -l'               # ... dumb
 alias termcast='telnet 213.184.131.118 37331'   # noway.ratry.ru 37331
 alias slurp='wget -r --no-parent'
@@ -131,6 +132,7 @@ alias saba='ssh dresdnerg@saba.cbio.mskcc.org'
 alias misodev='ssh dresdnerg@miso-dev.cbio.mskcc.org'
 alias miso='ssh dresdnerg@miso.cbio.mskcc.org'
 alias unagi='ssh dresdnerg@unagi.cbio.mskcc.org'
+alias cbio='ssh dresdnerg@cbio.mskcc.org'
 # }}}
 # Games {{{
 alias cao='TERM=rxvt telnet crawl.akrasiac.org' # urxvt-color screws up
