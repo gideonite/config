@@ -18,7 +18,7 @@ defscrollback 5000
 # defbce "on" # erase background with current bg color
 # }}}
 # Captions {{{
-#caption always '%-w%{.wB}%n %t%{-}%+w %=%{.w} %H: %l %{-}%d/%m %c'
+caption always '%-w%{.wB}%n %t%{-}%+w %=%{.w} %H: %l %{-}%d/%m %c'
 #caption always '%{kW}%?%F%{+b}%?%c %m/%d%{-b} | %0L=%-Lw%{+b}%50L>%n*%f %t%{-}%+Lw%-0=%{-}'
 # }}}
 # Bindkeys {{{
