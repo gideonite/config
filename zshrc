@@ -18,12 +18,12 @@ fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
 export PLY_HOME=~/ext/ply/dist/ply
-export PATH=/usr/local/share/npm/bin/:~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:~/.rbenv/shims:$PATH
+export PATH=~/.rbenv/bin:/usr/local/share/npm/bin/:~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
 typeset -U PATH
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-export JAVA_HOME=/Library/Java/Home
+export JAVA_HOME=/usr/lib/jvm/default-java/jre
 
 # cBio Portal Env Variables
 export PORTAL_HOME=~/dev/cbio-portal
