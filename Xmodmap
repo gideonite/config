@@ -1,2 +1,8 @@
+! Caps Lock -> Control
+keycode 66 = Control_L
 clear Lock
-keysym Caps_Lock = Escape
+add Control = Control_L
+keycode 117 = Caps_Lock
+add Lock = Caps_Lock
+
+!keycode 135 = Super_R
