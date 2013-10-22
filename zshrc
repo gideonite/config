@@ -105,12 +105,16 @@ alias git='nocorrect git'
 alias sag='nocorrect sag'
 alias pstree='nocorrect pstree'
 alias hg='nocorrect hg'
+alias php='nocorrect php'
+
 alias sl='sl -l'               # ... dumb
 alias termcast='telnet 213.184.131.118 37331'   # noway.ratry.ru 37331
 alias slurp='wget -r --no-parent'
 alias deflac='for file in *.flac; do $(flac -cd "$file" | lame -V 0 --vbr-new - "${file%.flac}.mp3"); done'   # convert all flacs in directory to v0
 alias heroku='nocorrect heroku'
 alias mutt='nocorrect mutt'
+alias proj='nocorrect proj'
+alias npm='nocorrect npm'
 # }}}
 # Shells {{{
 alias bh='ssh root@bughouse.econnectix.com'
