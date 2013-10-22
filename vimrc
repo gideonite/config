@@ -135,12 +135,14 @@ nnoremap <C-L> :tabn<Enter>
 " :w!! sudo-saves the current buffer
 cmap w!! w !sudo tee % >/dev/null
 
-vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+"vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+vmap <C-c> y:call system("xclip -i", getreg("\""))<CR>
 
 nmap `/ :nohl<CR>
 
 " kj exits insert mode
 inoremap kj <Esc>
+" inoremap <C-i> <Esc>
 
 " }}}
 " Autocommands {{{
