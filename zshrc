@@ -163,13 +163,18 @@ alias tdA="todo -A"              # displays all todo items
 alias usage='du -hs *'           # nicely displays disk usage of items in pwd
 which htop>/dev/null && alias top='htop' # prettier version of top if it exists
 
+# sometimes the network-manager needs encouragement
+which /etc/init.d/network-manager>/dev/null && alias interet-restart='sudo /etc/init.d/network-manager restart'
+
+alias open='xdg-open'
+
 alias p='echo cd ~portal~; cd ~/dev/cbio-portal'
 alias pjs='echo cd ~portaljs~; cd ~/dev/cbio-portal/portal/src/main/webapp/js'
 alias pf='echo cd ~peakflow~; cd ~/dev/peakflow/'
 alias locald="~/portal-deploy-scripts/local-deploy.sh"
 alias pp='vim /Users/dresdneg/dev/cbio-portal/src/main/resources/portal.properties'
 alias d="~/portal-deploy-scripts/deploy.sh"
-alias findn='find . -name'
+
 alias pw='echo "cd ~portal/webapp~"; cd ~/dev/cbio-portal/portal/src/main/webapp'
 # }}} 
 # Global shortcuts {{{
@@ -183,7 +188,6 @@ alias -g T='|tail'               # cat biglongfile T
 alias -g W='|wc'                 # cat biglongfile W
 # }}}
 # }}}
-# }}}
 # Prompt {{{
 source ~/.zshprompt
 # }}}
@@ -192,3 +196,38 @@ source ~/.zshprompt
 fortune 2>/dev/null || return 0 # essential!
 # }}}
 alias dotperl='rsync -av lib/* ~/.perl/'
+
+# {{{ marker
+
+# source: http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
+export MARKPATH=$HOME/.marks
+function jump {
+    cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+}
+function mark {
+    mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
+}
+
+function unmark {
+    rm -i "$MARKPATH/$1"
+}
+function marks {
+    ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
+}
+
+# marks function for mac os
+# function marks {
+#     \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
+# }
+
+# tab completion for zsh
+function _completemarks {
+    reply=($(ls $MARKPATH))
+}
+
+compctl -K _completemarks jump
+compctl -K _completemarks unmark
+
+alias j='jump'
+
+# }}}
