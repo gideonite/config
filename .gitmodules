@@ -64,3 +64,6 @@
 [submodule "vim/bundle/vim-fireplace/"]
 	path = vim/bundle/vim-fireplace
 	url = https://github.com/tpope/vim-fireplace
+[submodule "vim/bundle/vim-ack/"]
+	path = vim/bundle/vim-fireplace
+	url = https://github.com/mileszs/ack.vim
