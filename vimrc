@@ -279,6 +279,10 @@ let python_hilight_all=1
 highlight clear SignColumn
 let g:gitgutter_enabled = 0
 
+" set number of colors to 16.  If it's 8, then solarized looks crappy in
+" screen
+set t_Co=16
+
 " Rainbowy parens, braces, and brackets thanks to Eidolos{{{
 let g:rainbow         = 1 " Must be a more compact way of setting all these
 let g:rainbow_nested  = 1
