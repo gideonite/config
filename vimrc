@@ -77,13 +77,14 @@ set tags+='./.tags,.tags' " add .tags files
 set tags+='./../tags,../tags,./../.tags,../.tags' " look in the level above
 "}}}
 " Miscellaneous {{{
-"set commentstring="%s 
+"set commentstring="%s
 set dict=/usr/share/dict/words
 set tildeop           " Turn ~ into an operator
 let g:EnhCommentifyBindInInsert = 'No' " No enhancedcommentify in insert mode
 let g:EnhCommentifyRespectIndent = 'Yes' " indent where I want you to indent
 set switchbuf=useopen " Jump to open window containing jump target if available
 set path=.,/usr/include,,** " recursively append everything in current directory for :find
+:set viminfo^=% " Remember open buffers
 "}}}
 " Persistent undo {{{
 if exists("+undofile")
@@ -101,6 +102,12 @@ nmap <Space> <C-D>
 
 " F5 -> toggle :set paste
 set pastetoggle=<f5>
+
+" TODO this blows. How to enable/disable?
+map <F10> :GitGutterEnable<CR>
+imap <F10> :GitGutterEnable<CR>
+map <F9> :GitGutterDisable<CR>
+imap <F9> :GitGutterDisable<CR>
 
 " F11 -> spellcheck hilighting on
 map <F11> :call <SID>spell()<CR>
@@ -141,7 +148,7 @@ vmap <C-c> y:call system("xclip -i", getreg("\""))<CR>
 nmap `/ :nohl<CR>
 
 " kj exits insert mode
-inoremap kj <Esc>
+" inoremap kj <Esc>
 " inoremap <C-i> <Esc>
 
 " }}}
@@ -272,6 +279,8 @@ let g:vimclojure#ParenRainbow = 1
 
 " let g:vimclojure#NailgunClient = "/usr/local/bin/ng"
 " let g:vimclojure#WantNailgun = 1
+
+nnoremap <localleader>sh :Slamhound<CR>
 
 let python_hilight_all=1
 

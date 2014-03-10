@@ -23,13 +23,17 @@ typeset -U PATH
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-export JAVA_HOME=/usr/lib/jvm/default-java/jre
+export JAVA_HOME=/opt/java/jdk/
+export IDEA_JDK=/usr/local/src/jdk1.7.0_45
 
 # cBio Portal Env Variables
 export PORTAL_HOME=~/dev/cbio-portal
 export CGDS_HOME=~/dev/cbio-portal/portal
 export CGDS_DATA_HOME=~/dev/cbio-portal/portal
 export PORTAL_DATA_HOME=~/dev/cbio-portal/portal-data
+
+export BROWSER=`which google-chrome>/dev/null`
+
 
 # }}}
 # Setopts {{{
@@ -106,6 +110,7 @@ alias sag='nocorrect sag'
 alias pstree='nocorrect pstree'
 alias hg='nocorrect hg'
 alias php='nocorrect php'
+alias mongo='nocorrect mongo'
 
 alias sl='sl -l'               # ... dumb
 alias termcast='telnet 213.184.131.118 37331'   # noway.ratry.ru 37331
@@ -115,6 +120,13 @@ alias heroku='nocorrect heroku'
 alias mutt='nocorrect mutt'
 alias proj='nocorrect proj'
 alias npm='nocorrect npm'
+alias valgrind='nocorrect valgrind'
+alias racket='nocorrect racket'
+alias pip='nocorrect pip'
+
+alias gst='git status'
+alias gdif='git diff'
+
 # }}}
 # Shells {{{
 alias bh='ssh root@bughouse.econnectix.com'
@@ -231,3 +243,6 @@ compctl -K _completemarks unmark
 alias j='jump'
 
 # }}}
+
+# OPAM configuration
+. /home/gideon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

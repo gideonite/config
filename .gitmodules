@@ -67,3 +67,6 @@
 [submodule "vim/bundle/vim-ack/"]
 	path = vim/bundle/vim-fireplace
 	url = https://github.com/mileszs/ack.vim
+[submodule "vim/bundle/vim-slamhound/"]
+	path = vim/bundle/vim-fireplace
+	url = https://github.com/mileszs/ack.vim

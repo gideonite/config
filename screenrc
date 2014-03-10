@@ -14,8 +14,8 @@ defscrollback 5000
 # allow bold colors - necessary for some reason
 # attrcolor b ".I"
 # tell screen how to set colors. AB = background, AF=foreground
-# termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
-# defbce "on" # erase background with current bg color
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce "on" # erase background with current bg color
 # }}}
 # Captions {{{
 caption always '%-w%{.wB}%n %t%{-}%+w %=%{.w} %H: %l %{-}%d/%m %c'
