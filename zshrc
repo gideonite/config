@@ -23,7 +23,7 @@ typeset -U PATH
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-export JAVA_HOME=/opt/java/jdk/
+# export JAVA_HOME=/opt/java/jdk/
 export IDEA_JDK=/usr/local/src/jdk1.7.0_45
 
 # cBio Portal Env Variables
@@ -123,6 +123,7 @@ alias npm='nocorrect npm'
 alias valgrind='nocorrect valgrind'
 alias racket='nocorrect racket'
 alias pip='nocorrect pip'
+alias ipython='nocorrect ipython'
 
 alias gst='git status'
 alias gdif='git diff'
@@ -174,19 +175,20 @@ alias restartx='sleep 5; startx' # restarts X!
 alias tdA="todo -A"              # displays all todo items
 alias usage='du -hs *'           # nicely displays disk usage of items in pwd
 which htop>/dev/null && alias top='htop' # prettier version of top if it exists
+alias agx="ag --ignore '*.xml'"  # silver searcher that ignores xml.
 
 # sometimes the network-manager needs encouragement
 which /etc/init.d/network-manager>/dev/null && alias interet-restart='sudo /etc/init.d/network-manager restart'
 
-alias open='xdg-open'
+# alias open='xdg-open'         # doesn't work on not on mac
 
+# cBioPortal
 alias p='echo cd ~portal~; cd ~/dev/cbio-portal'
 alias pjs='echo cd ~portaljs~; cd ~/dev/cbio-portal/portal/src/main/webapp/js'
 alias pf='echo cd ~peakflow~; cd ~/dev/peakflow/'
 alias locald="~/portal-deploy-scripts/local-deploy.sh"
 alias pp='vim /Users/dresdneg/dev/cbio-portal/src/main/resources/portal.properties'
 alias d="~/portal-deploy-scripts/deploy.sh"
-
 alias pw='echo "cd ~portal/webapp~"; cd ~/dev/cbio-portal/portal/src/main/webapp'
 # }}} 
 # Global shortcuts {{{
@@ -204,10 +206,11 @@ alias -g W='|wc'                 # cat biglongfile W
 source ~/.zshprompt
 # }}}
 
-# Print to stdout {{{
-fortune 2>/dev/null || return 0 # essential!
+# fortune {{{
+#fortune 2>/dev/null || return 0 # essential!
 # }}}
 alias dotperl='rsync -av lib/* ~/.perl/'
+
 
 # {{{ marker
 
@@ -244,5 +247,18 @@ alias j='jump'
 
 # }}}
 
+#{{{ perka
+export WORKSPACE=$HOME/perka
+export ANDROID_HOME=$WORKSPACE/dev/android/android-sdk-macosx
+export MAVEN_OPTS=-Xmx1024M
+export M2_HOME=$WORKSPACE/dev/maven
+export PATH=$WORKSPACE/dev/bin:${M2_HOME}/bin:$ANDROID_HOME/platform-tools:$PATH
+export PATH=/Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/:$PATH
+export PATH=/usr/local/mysql/bin:$PATH
+export PATH=$M2_HOME/bin:$PATH
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+alias fastmvn="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests"
+#}}}
+
 # OPAM configuration
-. /home/gideon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+# . /home/gideon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
