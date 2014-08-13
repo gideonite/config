@@ -287,7 +287,7 @@ let g:vimclojure#ParenRainbow = 1
 " let g:vimclojure#NailgunClient = "/usr/local/bin/ng"
 " let g:vimclojure#WantNailgun = 1
 
-nnoremap <localleader>sh :Slamhound<CR>
+" nnoremap <localleader>sh :Slamhound<CR>
 
 let python_hilight_all=1
 
