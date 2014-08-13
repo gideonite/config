@@ -104,10 +104,10 @@ nmap <Space> <C-D>
 set pastetoggle=<f5>
 
 " TODO this blows. How to enable/disable?
-map <F10> :GitGutterEnable<CR>
-imap <F10> :GitGutterEnable<CR>
-map <F9> :GitGutterDisable<CR>
-imap <F9> :GitGutterDisable<CR>
+" map <F10> :GitGutterEnable<CR>
+" imap <F10> :GitGutterEnable<CR>
+" map <F9> :GitGutterDisable<CR>
+" imap <F9> :GitGutterDisable<CR>
 
 " F11 -> spellcheck hilighting on
 map <F11> :call <SID>spell()<CR>
