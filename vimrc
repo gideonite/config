@@ -147,6 +147,13 @@ vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 
 nmap `/ :nohl<CR>
 
+" Intellij *shiver* -like jump to function declaration.
+fu! JumpToTag()
+    let name = expand('<cword>')
+    exe ":tag " . name
+endfu
+nmap <C-b> :call JumpToTag() <CR>
+
 " kj exits insert mode
 " inoremap kj <Esc>
 " inoremap <C-i> <Esc>
