@@ -73,3 +73,6 @@
 [submodule "vim/bundle/timl/"]
 	path = vim/bundle/timl
 	url = https://github.com/tpope/timl.git
+[submodule "vim/bundle/julia-vim/"]
+	path = vim/bundle/julia-vim
+	url = git://github.com/JuliaLang/julia-vim.git
