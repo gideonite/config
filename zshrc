@@ -125,8 +125,14 @@ alias racket='nocorrect racket'
 alias pip='nocorrect pip'
 alias ipython='nocorrect ipython'
 
+# git alias
 alias gst='git status'
-alias gdif='git diff'
+alias gd='git diff'
+alias gdl='git diff --name-only'
+alias gch='git checkout'
+alias glg='git log'
+
+alias prettyjson='python -m json.tool'
 
 # }}}
 # Shells {{{
