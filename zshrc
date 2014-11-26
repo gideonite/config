@@ -1,4 +1,4 @@
-# .zshrc by Jordan Lewis
+# .zshrc by Jordan Lewis and Gideon Dresdner.
 
 # Environment variables {{{
 HISTFILE=~/.zshhistory            # What histfile are we using?
@@ -21,18 +21,49 @@ export PLY_HOME=~/ext/ply/dist/ply
 export PATH=~/.rbenv/bin:/usr/local/share/npm/bin/:~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
 typeset -U PATH
 
+# Latex
+export PATH=/usr/texbin:$PATH
+
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# export JAVA_HOME=/opt/java/jdk/
 export IDEA_JDK=/usr/local/src/jdk1.7.0_45
 
-# cBio Portal Env Variables
+# Stupid gulp thing.
+ulimit -S -n 2048
+
+#{{{ cBioPortal
 export PORTAL_HOME=~/dev/cbio-portal
 export CGDS_HOME=~/dev/cbio-portal/portal
 export CGDS_DATA_HOME=~/dev/cbio-portal/portal
 export PORTAL_DATA_HOME=~/dev/cbio-portal/portal-data
+#}}}
+#{{{ perka
+export WORKSPACE=$HOME/perka
+export ANDROID_HOME=$WORKSPACE/dev/android/android-sdk-macosx
+export MAVEN_OPTS=-Xmx1536M
+export PATH=$WORKSPACE/dev/bin:${M2_HOME}/bin:$ANDROID_HOME/platform-tools:$PATH
+export PATH=/Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/:$PATH
+export PATH=/usr/local/mysql/bin:$PATH
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+alias fastgulp="gulp gen && gulp -p admin,merchant,profile,validator"
+alias fastmvn="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests"
+alias build="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests clean install && notify 'BUILD DONE'"
+alias resumefrom="fastmvn -T 1.5C clean install -rf"
+alias findbugs="mvn -DskipCassandraTests -DskipDependencyChecks -DskipTests"
+alias mvnpl="mvn clean install -pl "
+alias pbs="~/myperka/scripts/pbs.sh"
+alias notify="~/myperka/scripts/notify.sh"
+alias starter="vim ~/.starter.json"
+alias offshards="jq '.[\"jobs\"] | .[] | {\"name\", \"count\":.count} | select(.count < 1) | {\"name\"}' ~/.starter.json | grep -v \"{\" | grep -v \"}\" | awk -F: '{print \$2}'"
 
-export BROWSER=`which google-chrome>/dev/null`
+export ANDROID_HOME=$HOME/android-sdk-macosx/
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+
+export M2_HOME=$WORKSPACE/dev/maven    # perka
+#export M2_HOME=/usr/local/apache-maven  # rest of the world
+export PATH=$M2_HOME/bin:$PATH
+#}}}
 
 
 # }}}
@@ -111,6 +142,7 @@ alias pstree='nocorrect pstree'
 alias hg='nocorrect hg'
 alias php='nocorrect php'
 alias mongo='nocorrect mongo'
+alias cmus='nocorrect cmus'
 
 alias sl='sl -l'               # ... dumb
 alias termcast='telnet 213.184.131.118 37331'   # noway.ratry.ru 37331
@@ -133,6 +165,9 @@ alias gch='git checkout'
 alias glg='git log'
 
 alias prettyjson='python -m json.tool'
+
+alias dotperl='rsync -av lib/* ~/.perl/'
+alias julia='/Applications/Julia-0.2.1.app/Contents/Resources/julia/bin/julia'      # julia lang
 
 # }}}
 # Shells {{{
@@ -181,7 +216,8 @@ alias restartx='sleep 5; startx' # restarts X!
 alias tdA="todo -A"              # displays all todo items
 alias usage='du -hs *'           # nicely displays disk usage of items in pwd
 which htop>/dev/null && alias top='htop' # prettier version of top if it exists
-alias agx="ag --ignore '*.xml'"  # silver searcher that ignores xml.
+alias agj="ag --ignore target"   # silver searcher that ignores the maven target directory.
+alias agjs="ag --ignore-dir perka-client --ignore-dir flatpack"
 
 # sometimes the network-manager needs encouragement
 which /etc/init.d/network-manager>/dev/null && alias interet-restart='sudo /etc/init.d/network-manager restart'
@@ -211,12 +247,15 @@ alias -g W='|wc'                 # cat biglongfile W
 # Prompt {{{
 source ~/.zshprompt
 # }}}
-
-# fortune {{{
-#fortune 2>/dev/null || return 0 # essential!
+# Functions {{{
+aalias() {
+    # Grabs the aliased value from within the quotes
+    alias $1 | awk -F "'" '{print $2}'
+}
 # }}}
-alias dotperl='rsync -av lib/* ~/.perl/'
-
+# fortune {{{
+fortune 2>/dev/null || return 0 # essential!
+# }}}
 
 # {{{ marker
 
@@ -253,18 +292,6 @@ alias j='jump'
 
 # }}}
 
-#{{{ perka
-export WORKSPACE=$HOME/perka
-export ANDROID_HOME=$WORKSPACE/dev/android/android-sdk-macosx
-export MAVEN_OPTS=-Xmx1024M
-export M2_HOME=$WORKSPACE/dev/maven
-export PATH=$WORKSPACE/dev/bin:${M2_HOME}/bin:$ANDROID_HOME/platform-tools:$PATH
-export PATH=/Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/:$PATH
-export PATH=/usr/local/mysql/bin:$PATH
-export PATH=$M2_HOME/bin:$PATH
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-alias fastmvn="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests"
-#}}}
 
 # OPAM configuration
 # . /home/gideon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
