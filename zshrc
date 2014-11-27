@@ -1,5 +1,11 @@
 # .zshrc by Jordan Lewis and Gideon Dresdner.
 
+# Startup {{{
+
+# Start X immediately at login.
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+
+# }}}
 # Environment variables {{{
 HISTFILE=~/.zshhistory            # What histfile are we using?
 HISTSIZE=100000                   # Big = better
@@ -42,9 +48,9 @@ export WORKSPACE=$HOME/perka
 export ANDROID_HOME=$WORKSPACE/dev/android/android-sdk-macosx
 export MAVEN_OPTS=-Xmx1536M
 export PATH=$WORKSPACE/dev/bin:${M2_HOME}/bin:$ANDROID_HOME/platform-tools:$PATH
-export PATH=/Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/:$PATH
+#export PATH=/Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+#export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 alias fastgulp="gulp gen && gulp -p admin,merchant,profile,validator"
 alias fastmvn="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests"
 alias build="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests clean install && notify 'BUILD DONE'"
@@ -167,7 +173,6 @@ alias glg='git log'
 alias prettyjson='python -m json.tool'
 
 alias dotperl='rsync -av lib/* ~/.perl/'
-alias julia='/Applications/Julia-0.2.1.app/Contents/Resources/julia/bin/julia'      # julia lang
 
 # }}}
 # Shells {{{
@@ -222,7 +227,7 @@ alias agjs="ag --ignore-dir perka-client --ignore-dir flatpack"
 # sometimes the network-manager needs encouragement
 which /etc/init.d/network-manager>/dev/null && alias interet-restart='sudo /etc/init.d/network-manager restart'
 
-# alias open='xdg-open'         # doesn't work on not on mac
+alias open='xdg-open'
 
 # cBioPortal
 alias p='echo cd ~portal~; cd ~/dev/cbio-portal'

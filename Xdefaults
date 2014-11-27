@@ -33,12 +33,10 @@ URxvt.lineSpace:            0
 URxvt.allow_bold:           false
 !URxvt.font:                 -*-terminus-medium-r-normal-*-12-120-72-72-c-60-iso8859-1
 
-!URxvt*font: xft:Anonymous Pro:pixelsize=14
-!URxvt*boldFont: xft:Anonymous Pro:pixelsize=14
-URxvt*font: xft:Anonymous Pro-10:pixelsize=16
+URxvt*font: xft:Anonymous Pro:pixelsize=12
 
 ! Fix font space
-URxvt*letterSpace: 0
+URxvt*letterSpace: -2
 
 ! Scrollbar
 URxvt.scrollStyle:          rxvt
@@ -60,6 +58,7 @@ URxvt.pointerBlank:         true
 !!Source http://github.com/altercation/solarized
 
 *background: #002b36
+
 *foreground: #657b83
 !!*fading: 40
 *fadeColor: #002b36
