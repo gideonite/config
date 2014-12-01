@@ -259,7 +259,7 @@ aalias() {
 }
 # }}}
 # fortune {{{
-fortune 2>/dev/null || return 0 # essential!
+fortune 2>/dev/null #|| return 0 # essential!
 # }}}
 
 # {{{ marker
