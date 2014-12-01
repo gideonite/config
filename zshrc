@@ -12,7 +12,6 @@ HISTSIZE=100000                   # Big = better
 SAVEHIST=7000                     # When to save to the file?
 export SHELL=`which zsh`                 # New shells don't open bash
 export EDITOR=vim                        # Use vim!
-export GREP_OPTIONS='--color=auto'       # Color my greps
 export GOROOT=$HOME/go
 export GOOS=darwin
 export GOARCH=amd64
@@ -150,6 +149,7 @@ alias php='nocorrect php'
 alias mongo='nocorrect mongo'
 alias cmus='nocorrect cmus'
 
+alias grep='grep --color=auto'          # Color my greps
 alias sl='sl -l'               # ... dumb
 alias termcast='telnet 213.184.131.118 37331'   # noway.ratry.ru 37331
 alias slurp='wget -r --no-parent'
