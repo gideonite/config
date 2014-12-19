@@ -9,11 +9,12 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# start programs at startup
+# programs to execute at startup
 exec xmodmap ~/.Xmodmap
 exec xcape
 exec xflux -z 11215
 exec google-musicmanager
+exec --no-startup-id xautolock -time 5 -locker i3lock -c 000000
 
 # set wall paper
 exec --no-startup-id feh --bg-fill ~/Pictures/nasa-earth-wallpaper.jpg
@@ -42,7 +43,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+b exec google-chrome-stable
 
 # lock the machine
-bindsym $mod+Shift+z exec i3lock
+bindsym $mod+Shift+z exec i3lock -c 000000
 
 # scren shot
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/Pictures/screenshots/'
