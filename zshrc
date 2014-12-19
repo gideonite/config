@@ -176,26 +176,13 @@ alias dotperl='rsync -av lib/* ~/.perl/'
 
 # }}}
 # Shells {{{
-alias bh='ssh root@bughouse.econnectix.com'
-alias bhsec='ssh jlewis@bhsec.bard.edu'
-alias ch='ssh root@cheaphotel.econnectix.com'
-#alias chana='ssh jlewis@192.168.0.3'           # chana, my mbp.. need dyndns
-alias cs='ssh jalewis@altair.cs.uchicago.edu'
-alias echoduet='ssh jlewis@echoduet.net'
-alias econ='ssh jlewis@mail.econnectix.com'
-#alias enwina='ssh -X 192.168.0.2'               # This is/was my HP
-alias harper='TERM=xterm ssh jalewis@harper.uchicago.edu'
-alias mookmo='ssh jlewis@mookmo.net'
-alias sartak='ssh toft@sartak.org'
-alias sd='ssh jlewis@silenceisdefeat.com'
-alias yiff='ssh eidolos@yiff.mit.edu'
+alias mookmo='ssh gideon@mookmo.net'
 
 alias cbio='ssh dresdnerg@cbio.mskcc.org'
 alias saba='ssh dresdnerg@saba.cbio.mskcc.org'
 alias misodev='ssh dresdnerg@miso-dev.cbio.mskcc.org'
 alias miso='ssh dresdnerg@miso.cbio.mskcc.org'
 alias unagi='ssh dresdnerg@unagi.cbio.mskcc.org'
-alias cbio='ssh dresdnerg@cbio.mskcc.org'
 # }}}
 # Games {{{
 alias cao='TERM=rxvt telnet crawl.akrasiac.org' # urxvt-color screws up
