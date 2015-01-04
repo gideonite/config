@@ -148,6 +148,7 @@ alias hg='nocorrect hg'
 alias php='nocorrect php'
 alias mongo='nocorrect mongo'
 alias cmus='nocorrect cmus'
+alias node='nocorrect node'
 
 alias grep='grep --color=auto'          # Color my greps
 alias sl='sl -l'               # ... dumb
@@ -162,6 +163,7 @@ alias valgrind='nocorrect valgrind'
 alias racket='nocorrect racket'
 alias pip='nocorrect pip'
 alias ipython='nocorrect ipython'
+alias loc='locate'
 
 # git alias
 alias gst='git status'

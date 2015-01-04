@@ -10,11 +10,13 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # programs to execute at startup
-exec xmodmap ~/.Xmodmap
-exec xcape
-exec xflux -z 11215
-exec google-musicmanager
-exec --no-startup-id xautolock -time 5 -locker i3lock -c 000000
+exec setxkbmap -option ctrl:nocaps   # map caps_lock to control
+exec xcape                      # when caps_lock is mapped, enable tap escape.
+#exec xflux -z 11215
+exec xflux -l 31.7833 -g 35.2167   # Jerusalem
+
+exec --no-startup-id google-musicmanager
+exec --no-startup-id xautolock -time 5 -locker "i3lock -c 000000"
 
 # set wall paper
 exec --no-startup-id feh --bg-fill ~/Pictures/nasa-earth-wallpaper.jpg
@@ -191,7 +193,7 @@ bar {
         urgent_workspace   #aa0000 #990000 #ffffff
     }
     # i3bar position
-    position top
+    position bottom
     # Using custom i3status.conf
     status_command i3status -c ~/.i3/i3status.conf
 }
