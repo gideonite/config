@@ -164,6 +164,9 @@ alias racket='nocorrect racket'
 alias pip='nocorrect pip'
 alias ipython='nocorrect ipython'
 alias loc='locate'
+alias prettyjson='python -m json.tool'
+alias dotperl='rsync -av lib/* ~/.perl/'
+alias downloads='cd ~/Downloads && ls -lt | head -n 5'
 
 # git alias
 alias gst='git status'
@@ -171,10 +174,6 @@ alias gd='git diff'
 alias gdl='git diff --name-only'
 alias gch='git checkout'
 alias glg='git log'
-
-alias prettyjson='python -m json.tool'
-
-alias dotperl='rsync -av lib/* ~/.perl/'
 
 # }}}
 # Shells {{{

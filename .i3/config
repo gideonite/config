@@ -11,12 +11,12 @@
 
 # programs to execute at startup
 exec setxkbmap -option ctrl:nocaps   # map caps_lock to control
-exec xcape                      # when caps_lock is mapped, enable tap escape.
+exec xcape                           # when caps_lock is mapped, enable tap escape.
 #exec xflux -z 11215
-exec xflux -l 31.7833 -g 35.2167   # Jerusalem
+exec xflux -l 31.7833 -g 35.2167     # Jerusalem
 
 exec --no-startup-id google-musicmanager
-exec --no-startup-id xautolock -time 5 -locker "i3lock -c 000000"
+exec --no-startup-id xautolock -time 10 -locker "i3lock -c 000000"
 
 # set wall paper
 exec --no-startup-id feh --bg-fill ~/Pictures/nasa-earth-wallpaper.jpg
@@ -60,9 +60,12 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# Use mod-Control-Up and Down to rotate through the workspace list.
+# Rotate through the workspace list.
 bindsym $mod+Control+bracketleft workspace prev
 bindsym $mod+Control+bracketright workspace next
+
+# Go to last used workspace
+bindsym $mod+grave workspace back_and_forth
 
 # change focus
 bindsym $mod+j focus left
