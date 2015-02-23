@@ -23,7 +23,8 @@ fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
 export PLY_HOME=~/ext/ply/dist/ply
-export PATH=~/.rbenv/bin:/usr/local/share/npm/bin/:~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=~/.gem/ruby/2.1.0/bin:/usr/local/share/npm/bin/:~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
+
 typeset -U PATH
 
 # Latex
@@ -166,10 +167,11 @@ alias valgrind='nocorrect valgrind'
 alias racket='nocorrect racket'
 alias pip='nocorrect pip'
 alias ipython='nocorrect ipython'
-alias loc='locate'
+alias locate='locate -i'            # always want to ignore case.
 alias prettyjson='python -m json.tool'
 alias dotperl='rsync -av lib/* ~/.perl/'
 alias downloads='cd ~/Downloads && ls -lt | head -n 5'
+alias i3lock='i3lock -c 000000'
 
 # git alias
 alias gst='git status'
