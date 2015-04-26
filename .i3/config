@@ -73,10 +73,12 @@ bindsym $mod+Control+bracketright workspace next
 bindsym $mod+grave workspace back_and_forth
 
 # change focus
-bindsym $mod+j focus left
+#bindsym $mod+j focus left
+bindcode $mod+44 focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+#bindsym $mod+; focus left
+bindcode $mod+47 focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
