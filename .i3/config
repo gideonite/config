@@ -10,8 +10,11 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # programs to execute at startup
-exec setxkbmap -option ctrl:nocaps   # map caps_lock to control
-exec xcape                           # when caps_lock is mapped, enable tap escape.
+exec setxkbmap -option ctrl:nocaps && xcape
+
+# disable trackpad
+exec xinput --disable 11
+
 #exec xflux -z 11215
 exec xflux -l 31.7833 -g 35.2167     # Jerusalem
 
