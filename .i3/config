@@ -46,6 +46,11 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # switch keyboard layouts
 bindcode $mod+33 exec --no-startup-id ~/.i3/toggle-keyboard-layout.sh
+
+# bind volume keys to alsamixer
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 2%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 2%-
+
 # start google-chrome
 bindsym $mod+b exec google-chrome-stable
 
