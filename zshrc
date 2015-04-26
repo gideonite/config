@@ -230,6 +230,9 @@ alias locald="~/portal-deploy-scripts/local-deploy.sh"
 alias pp='vim /Users/dresdneg/dev/cbio-portal/src/main/resources/portal.properties'
 alias d="~/portal-deploy-scripts/deploy.sh"
 alias pw='echo "cd ~portal/webapp~"; cd ~/dev/cbio-portal/portal/src/main/webapp'
+
+# passwords
+which lpass>/dev/null && alias pwds='lpass show active-passwords'
 # }}} 
 # Global shortcuts {{{
 alias -g ...='../..'             # Ease of going backward
