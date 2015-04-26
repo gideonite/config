@@ -22,7 +22,7 @@ exec --no-startup-id google-musicmanager
 exec --no-startup-id xautolock -time 10 -locker "i3lock -c 000000"
 
 # set wall paper
-exec --no-startup-id feh --bg-fill ~/Pictures/bulgarian-mountain.jpg
+exec --no-startup-id feh --bg-fill ~/Pictures/merging-galaxies.jpg
 
 set $mod Mod4
 
