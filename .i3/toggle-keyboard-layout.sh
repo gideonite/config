@@ -2,8 +2,8 @@
 
 CURR=`setxkbmap -query | awk '/layout/ {print $2}'`
 
-if [ $CURR = "en_US" ] || [ $CURR = "en" ]; then
-    setxkbmap il
+if [ $CURR = "us" ]; then
+    setxkbmap il && killall -s USR1 py3status
 else
-    setxkbmap en_US
+    setxkbmap us && killall -s USR1 py3status
 fi
