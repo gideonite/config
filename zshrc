@@ -189,6 +189,8 @@ alias saba='ssh dresdnerg@saba.cbio.mskcc.org'
 alias misodev='ssh dresdnerg@miso-dev.cbio.mskcc.org'
 alias miso='ssh dresdnerg@miso.cbio.mskcc.org'
 alias unagi='ssh dresdnerg@unagi.cbio.mskcc.org'
+
+alias ssh_proxy='ssh -C2qTnN -D ' # https://calomel.org/firefox_ssh_proxy.html
 # }}}
 # Games {{{
 alias cao='TERM=rxvt telnet crawl.akrasiac.org' # urxvt-color screws up
