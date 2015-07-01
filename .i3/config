@@ -9,20 +9,16 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# programs to execute at startup
+
+
 exec setxkbmap -option ctrl:nocaps && xcape
-
-# disable trackpad
-exec xinput --disable 11
-
-#exec xflux -z 11215
-exec xflux -l 31.7833 -g 35.2167     # Jerusalem
-
+exec xinput --disable 11                                            # disable trackpad
+exec --no-startup-id xflux -z 11215
+#exec --no-startup-id xflux -l 31.7833 -g 35.2167                    # Jerusalem
+exec --no-startup-id emacs --daemon
 exec --no-startup-id google-musicmanager
-exec --no-startup-id xautolock -time 10 -locker "i3lock -c 000000"
-
-# set wall paper
-exec --no-startup-id feh --bg-fill ~/Pictures/merging-galaxies.jpg
+exec --no-startup-id xautolock -time 60 -locker "i3lock -c 000000"
+exec --no-startup-id feh --bg-fill ~/Pictures/merging-galaxies.jpg  # set wall paper
 
 set $mod Mod4
 
@@ -216,5 +212,6 @@ bar {
     # i3bar position
     position bottom
     # Using custom i3status.conf
-    status_command i3status -c ~/.i3/i3status.conf
+    #status_command i3status -c ~/.i3/i3status.conf
+    status_command py3status -c ~/.i3/i3status.conf
 }
