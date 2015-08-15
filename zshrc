@@ -190,6 +190,8 @@ alias misodev='ssh dresdnerg@miso-dev.cbio.mskcc.org'
 alias miso='ssh dresdnerg@miso.cbio.mskcc.org'
 alias unagi='ssh dresdnerg@unagi.cbio.mskcc.org'
 
+alias cbsu='ssh gmd87@cbsulogin.tc.cornell.edu'
+
 alias ssh_proxy='ssh -C2qTnN -D ' # https://calomel.org/firefox_ssh_proxy.html
 # }}}
 # Games {{{
@@ -235,6 +237,9 @@ alias pw='echo "cd ~portal/webapp~"; cd ~/dev/cbio-portal/portal/src/main/webapp
 
 # passwords
 which lpass>/dev/null && alias pwds='lpass show active-passwords'
+
+alias findreplace="perl -pi.bak -e 's/\"//g'"
+
 # }}} 
 # Global shortcuts {{{
 alias -g ...='../..'             # Ease of going backward
@@ -259,7 +264,6 @@ aalias() {
 # fortune {{{
 fortune 2>/dev/null #|| return 0 # essential!
 # }}}
-
 # {{{ marker
 
 # source: http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
