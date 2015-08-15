@@ -53,7 +53,7 @@ bindsym $mod+b exec google-chrome-stable
 # lock the machine
 bindsym $mod+Shift+z exec i3lock -c 000000
 
-# scren shot
+# screen shot
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/Pictures/screenshots/'
 
 # kill focused window
@@ -132,10 +132,10 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
+bindsym $mod+1 workspace 1: mail
+bindsym $mod+2 workspace 2: www
+bindsym $mod+3 workspace 3: shell
+bindsym $mod+4 workspace 4: emacs
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
