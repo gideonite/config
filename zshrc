@@ -172,6 +172,7 @@ alias prettyjson='python -m json.tool'
 alias dotperl='rsync -av lib/* ~/.perl/'
 alias downloads='cd ~/Downloads && ls -lt | head -n 5'
 alias i3lock='i3lock -c 000000'
+alias octave='octave --no-gui'
 
 # git alias
 alias gst='git status'
