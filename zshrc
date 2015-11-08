@@ -227,15 +227,6 @@ which /etc/init.d/network-manager>/dev/null && alias interet-restart='sudo /etc/
 
 alias open='xdg-open'
 
-# cBioPortal
-alias p='echo cd ~portal~; cd ~/dev/cbio-portal'
-alias pjs='echo cd ~portaljs~; cd ~/dev/cbio-portal/portal/src/main/webapp/js'
-alias pf='echo cd ~peakflow~; cd ~/dev/peakflow/'
-alias locald="~/portal-deploy-scripts/local-deploy.sh"
-alias pp='vim /Users/dresdneg/dev/cbio-portal/src/main/resources/portal.properties'
-alias d="~/portal-deploy-scripts/deploy.sh"
-alias pw='echo "cd ~portal/webapp~"; cd ~/dev/cbio-portal/portal/src/main/webapp'
-
 # passwords
 which lpass>/dev/null && alias pwds='lpass show active-passwords'
 
