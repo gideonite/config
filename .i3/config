@@ -56,7 +56,7 @@ bindsym $mod+m exec --no-startup-id amixer set Master toggle
 bindsym $mod+b exec google-chrome-stable
 
 # lock the machine
-bindsym $mod+Shift+z exec i3lock -c 000000
+bindsym $mod+Shift+z exec systemctl suspend && i3lock -c 000000
 
 # screen shot
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/Pictures/screenshots/'
