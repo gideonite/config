@@ -291,6 +291,8 @@ alias j='jump'
 
 # }}}
 
+[[ $EMACS = t ]] && unsetopt zle
+
 
 # OPAM configuration
 # . /home/gideon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
