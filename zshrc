@@ -221,6 +221,8 @@ alias usage='du -hs *'           # nicely displays disk usage of items in pwd
 which htop>/dev/null && alias top='htop' # prettier version of top if it exists
 alias agj="ag --ignore target"   # silver searcher that ignores the maven target directory.
 alias agjs="ag --ignore-dir perka-client --ignore-dir flatpack"
+alias tarcompress="tar -cvzf"
+alias tardecompress="tar -xvf"
 
 # sometimes the network-manager needs encouragement
 which /etc/init.d/network-manager>/dev/null && alias interet-restart='sudo /etc/init.d/network-manager restart'
