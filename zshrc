@@ -179,7 +179,7 @@ alias gst='git status'
 alias gd='git diff'
 alias gdl='git diff --name-only'
 alias gch='git checkout'
-alias glg='git log'
+alias glg='git lg'
 
 # }}}
 # Shells {{{
