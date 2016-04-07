@@ -170,7 +170,8 @@ alias ipython='nocorrect ipython'
 alias locate='locate -i'            # always want to ignore case.
 alias prettyjson='python -m json.tool'
 alias dotperl='rsync -av lib/* ~/.perl/'
-alias downloads='cd ~/Downloads && ls -lt | head -n 5'
+alias downloads='cd /tmp/downloads && ls -lt | head -n 5'
+alias mvdownload="ls -t /tmp/downloads | head -n1 | sed -e 's/\n/\0/' | xargs -I{} cp /tmp/downloads/{}" # takes the latest downloaded file and moves it.
 alias i3lock='i3lock -c 000000'
 alias octave='octave --no-gui'
 
@@ -192,6 +193,10 @@ alias miso='ssh dresdnerg@miso.cbio.mskcc.org'
 alias unagi='ssh dresdnerg@unagi.cbio.mskcc.org'
 alias cbsu='ssh gmd87@cbsulogin.tc.cornell.edu'
 alias hal='ssh dresdnerg@hal.cbio.mskcc.org'
+alias nikola='ssh gmd87@nikola-compute01.coecis.cornell.edu'
+alias nikola1='ssh gmd87@nikola-compute01.coecis.cornell.edu'
+alias nikola2='ssh gmd87@nikola-compute02.coecis.cornell.edu'
+alias nikola3='ssh gmd87@nikola-compute03.coecis.cornell.edu'
 
 alias ssh_proxy='ssh -C2qTnN -D ' # https://calomel.org/firefox_ssh_proxy.html
 # }}}
@@ -295,6 +300,5 @@ alias j='jump'
 
 [[ $EMACS = t ]] && unsetopt zle
 
-
 # OPAM configuration
-# . /home/gideon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+. /home/gideon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
