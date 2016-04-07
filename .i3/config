@@ -13,6 +13,7 @@ exec --no-startup-id xflux -z 14852
 #exec --no-startup-id xflux -l 31.7833 -g 35.2167                   # Jerusalem
 #exec --no-startup-id emacs --daemon
 #exec --no-startup-id google-musicmanager
+exec --no-startup-id nm-applet
 exec --no-startup-id xautolock -time 60 -locker "i3lock -c 000000"
 exec --no-startup-id feh --bg-fill ~/Pictures/merging-galaxies.jpg  # set wall paper
 
@@ -50,8 +51,8 @@ bindcode $mod+33 exec --no-startup-id ~/.i3/toggle-keyboard-layout.sh
 bindsym $mod+z exec --no-startup-id ~/.i3/switch-screen.sh
 
 # bind volume keys to alsamixer bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 10%+
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 3%-
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 3%+
 bindsym $mod+m exec --no-startup-id amixer set Master toggle
 
 # start google-chrome
@@ -143,26 +144,26 @@ bindsym $mod+a focus parent
 # switch to workspace
 bindsym $mod+1 workspace 1: gideonite
 bindsym $mod+2 workspace 2: gmd87
-bindsym $mod+3 workspace 3: emacs
+bindsym $mod+3 workspace 3: code
 bindsym $mod+4 workspace 4: pdf
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+0 workspace 10: cluster
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1: gideonite
 bindsym $mod+Shift+2 move container to workspace 2: gmd87
-bindsym $mod+Shift+3 move container to workspace 3: emacs
+bindsym $mod+Shift+3 move container to workspace 3: code
 bindsym $mod+Shift+4 move container to workspace 4: pdf
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+0 move container to workspace 10: cluster
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
