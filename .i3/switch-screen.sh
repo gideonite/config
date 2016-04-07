@@ -10,6 +10,7 @@ function disconnect() {
     xrandr --output VGA1 --off --output LVDS1 --preferred --primary
     setxkbmap -option ctrl:nocaps && xcape
     feh --bg-fill ~/Pictures/merging-galaxies.jpg
+    xinput --disable $(xinput | grep -i TouchPad | cut -f2 | awk -F'=' '{print $2}')
 }
 
 xrandr | grep 'LVDS1 connected primary' &> /dev/null && connect || disconnect
