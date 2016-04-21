@@ -197,6 +197,7 @@ alias nikola='ssh gmd87@nikola-compute01.coecis.cornell.edu'
 alias nikola1='ssh gmd87@nikola-compute01.coecis.cornell.edu'
 alias nikola2='ssh gmd87@nikola-compute02.coecis.cornell.edu'
 alias nikola3='ssh gmd87@nikola-compute03.coecis.cornell.edu'
+alias nik1f='ssh -L 8080:localhost:8080 gmd87@nikola-compute01.coecis.cornell.edu'
 
 alias ssh_proxy='ssh -C2qTnN -D ' # https://calomel.org/firefox_ssh_proxy.html
 # }}}
@@ -263,6 +264,19 @@ aalias() {
 # fortune {{{
 fortune 2>/dev/null #|| return 0 # essential!
 # }}}
+# deadline counter {{{
+function deadline_counter {
+    DEADLINE_DAY=`date -d $1 +%j`
+    TODAY=`date +%j`
+    DAYS_LEFT=$(($DEADLINE_DAY - $TODAY))
+
+    echo
+    echo $2: $DAYS_LEFT "DAYS"
+}
+
+deadline_counter "May 20" "NIPS DEADLINE IN"
+# }}}
+
 # {{{ marker
 
 # source: http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
