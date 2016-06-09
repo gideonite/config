@@ -276,7 +276,7 @@ au BufRead,BufNewFile *.go set noexpandtab
 
 syntax enable
 set background=dark
-colorscheme solarized
+" colorscheme solarized
 
 let g:vimclojure#HighlightBuiltins = 1
 let g:vimclojure#HighlightContrib = 1

@@ -30,7 +30,7 @@ typeset -U PATH
 # Latex
 export PATH=/usr/texbin:$PATH
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+#if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
 
 export IDEA_JDK=/usr/local/src/jdk1.7.0_45
 
@@ -224,19 +224,19 @@ alias reload='source ~/.zshrc'   # re-sources this
 alias restartx='sleep 5; startx' # restarts X!
 alias tdA="todo -A"              # displays all todo items
 alias usage='du -hs *'           # nicely displays disk usage of items in pwd
-which htop>/dev/null && alias top='htop' # prettier version of top if it exists
+which htop>/dev/null 2>&1 && alias top='htop' # prettier version of top if it exists
 alias agj="ag --ignore target"   # silver searcher that ignores the maven target directory.
 alias agjs="ag --ignore-dir perka-client --ignore-dir flatpack"
 alias tarcompress="tar -cvzf"
 alias tardecompress="tar -xvf"
 
 # sometimes the network-manager needs encouragement
-which /etc/init.d/network-manager>/dev/null && alias interet-restart='sudo /etc/init.d/network-manager restart'
+which /etc/init.d/network-manager>/dev/null 2>&1 && alias interet-restart='sudo /etc/init.d/network-manager restart'
 
 alias open='xdg-open'
 
 # passwords
-which lpass>/dev/null && alias pwds='lpass show active-passwords'
+which lpass>/dev/null 2>&1 && alias pwds='lpass show active-passwords'
 
 alias findreplace="perl -pi.bak -e 's/\"//g'"
 
@@ -318,4 +318,4 @@ alias j='jump'
 . /home/gideon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # must be at end of file
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
