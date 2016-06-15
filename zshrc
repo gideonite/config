@@ -37,6 +37,7 @@ export IDEA_JDK=/usr/local/src/jdk1.7.0_45
 # Stupid gulp thing.
 ulimit -S -n 2048
 
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 #{{{ cBioPortal
 export PORTAL_HOME=~/dev/cbio-portal
 export CGDS_HOME=~/dev/cbio-portal/portal
