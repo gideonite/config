@@ -194,6 +194,11 @@ alias miso='ssh dresdnerg@miso.cbio.mskcc.org'
 alias unagi='ssh dresdnerg@unagi.cbio.mskcc.org'
 alias cbsu='ssh gmd87@cbsulogin.tc.cornell.edu'
 alias hal='ssh dresdnerg@hal.cbio.mskcc.org'
+function hal_port_forwarding {
+    PORT=$1
+    HAL_HOSTNAME=$2
+    ssh -v -L $PORT\:localhost:$PORT dresdnerg@hal.cbio.mskcc.org ssh -L $PORT\:localhost:$PORT -N dresdnerg@$HAL_HOSTNAME
+}
 alias nikola='ssh gmd87@nikola-compute01.coecis.cornell.edu'
 alias nikola1='ssh gmd87@nikola-compute01.coecis.cornell.edu'
 alias nikola2='ssh gmd87@nikola-compute02.coecis.cornell.edu'
