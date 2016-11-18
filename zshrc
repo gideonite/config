@@ -174,7 +174,7 @@ alias dotperl='rsync -av lib/* ~/.perl/'
 alias downloads='cd /tmp/downloads && ls -lt | head -n 5'
 alias mvdownload="ls -t /tmp/downloads | head -n1 | sed -e 's/\n/\0/' | xargs -I{} cp /tmp/downloads/{}" # takes the latest downloaded file and moves it.
 alias i3lock='i3lock -c 000000'
-alias octave='octave --no-gui'
+#alias octave='octave --no-gui'
 
 # git alias
 alias gst='git status'
@@ -204,6 +204,7 @@ alias nikola1='ssh gmd87@nikola-compute01.coecis.cornell.edu'
 alias nikola2='ssh gmd87@nikola-compute02.coecis.cornell.edu'
 alias nikola3='ssh gmd87@nikola-compute03.coecis.cornell.edu'
 alias nik1f='ssh -L 8080:localhost:8080 gmd87@nikola-compute01.coecis.cornell.edu'
+alias hex='ssh dresdnerg@hex.inf.ethz.ch'
 
 alias ssh_proxy='ssh -C2qTnN -D ' # https://calomel.org/firefox_ssh_proxy.html
 # }}}

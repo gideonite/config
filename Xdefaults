@@ -21,6 +21,7 @@ Xft.hintstyle:              hintslight
 URxvt.depth:                32
 URxvt.geometry:             90x30
 URxvt.transparent:          false
+URxvt.tintColor:            #00000
 URxvt.shading:              50
 URxvt.fading:               0
 ! URxvt.urgentOnBell:         true
@@ -30,11 +31,16 @@ URxvt.saveLines:            65535
 URxvt.internalBorder:       3
 URxvt.lineSpace:            0
 
+# Install urxvt-resize-font-git AUR from the AUR and add some key bindings
+URxvt.perl-ext-common:  ...,resize-font,...
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger:  C-Up
+
 ! Fonts
 URxvt.allow_bold:           true
 !URxvt.font:                 -*-terminus-medium-r-normal-*-12-120-72-72-c-60-iso8859-1
 
-URxvt*font: xft:Anonymous Pro:pixelsize=12
+URxvt*font: xft:Anonymous Pro:pixelsize=13
 
 ! Fix font space
 URxvt*letterSpace: -2
@@ -44,9 +50,9 @@ URxvt.scrollStyle:          rxvt
 URxvt.scrollBar:            false
 
 ! Perl extensions
-URxvt.perl-ext-common:      default,matcher
-URxvt.matcher.button:       1
-URxvt.urlLauncher:          firefox
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
 
 ! Cursor
 URxvt.cursorBlink:          true
