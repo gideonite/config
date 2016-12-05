@@ -205,6 +205,9 @@ alias nikola2='ssh gmd87@nikola-compute02.coecis.cornell.edu'
 alias nikola3='ssh gmd87@nikola-compute03.coecis.cornell.edu'
 alias nik1f='ssh -L 8080:localhost:8080 gmd87@nikola-compute01.coecis.cornell.edu'
 alias hex='ssh dresdnerg@hex.inf.ethz.ch'
+alias pex2='ssh dresdnerg@pex2.inf.ethz.ch'
+alias eth='sudo openconnect https://sslvpn.ethz.ch -u dgideon'
+alias cornell='openconnect https://cuvpn.cuvpn.cornell.edu -u gmd87'
 
 alias ssh_proxy='ssh -C2qTnN -D ' # https://calomel.org/firefox_ssh_proxy.html
 # }}}
