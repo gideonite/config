@@ -9,8 +9,9 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-exec --no-startup-id xflux -l 47.3769 -g 8.5417                     # Zurich
-#exec --no-startup-id xflux -z 14852                                # Ithaca
+exec --no-startup-id xflux -l 47.3769 -g 8.5417                    # Zurich
+#exec --no-startup-id xflux -z 14852                                  # Ithaca
+#exec --no-startup-id xflux -z 11215                                 # NYC
 #exec --no-startup-id xflux -l 31.7833 -g 35.2167                   # Jerusalem
 #exec --no-startup-id emacs --daemon
 #exec --no-startup-id google-musicmanager
