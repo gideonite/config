@@ -38,31 +38,31 @@ export CGDS_DATA_HOME=~/dev/cbio-portal/portal
 export PORTAL_DATA_HOME=~/dev/cbio-portal/portal-data
 #}}}
 #{{{ perka
-export WORKSPACE=$HOME/perka
-export ANDROID_HOME=$WORKSPACE/dev/android/android-sdk-macosx
-export MAVEN_OPTS=-Xmx1536M
-export PATH=$WORKSPACE/dev/bin:${M2_HOME}/bin:$ANDROID_HOME/platform-tools:$PATH
-export PATH=/Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/:$PATH
-export PATH=/usr/local/mysql/bin:$PATH
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-alias fastgulp="gulp gen && gulp -p admin,merchant,profile,validator"
-alias fastmvn="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests"
-alias build="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests clean install && notify 'BUILD DONE'"
-alias resumefrom="fastmvn -T 1.5C clean install -rf"
-alias findbugs="mvn -DskipCassandraTests -DskipDependencyChecks -DskipTests"
-alias mvnpl="mvn clean install -pl "
-alias pbs="~/myperka/scripts/pbs.sh"
-alias notify="~/myperka/scripts/notify.sh"
-alias starter="vim ~/.starter.json"
-alias offshards="jq '.[\"jobs\"] | .[] | {\"name\", \"count\":.count} | select(.count < 1) | {\"name\"}' ~/.starter.json | grep -v \"{\" | grep -v \"}\" | awk -F: '{print \$2}'"
-
-export ANDROID_HOME=$HOME/android-sdk-macosx/
-export PATH=$ANDROID_HOME/tools:$PATH
-export PATH=$ANDROID_HOME/platform-tools:$PATH
-
-export M2_HOME=$WORKSPACE/dev/maven    # perka
-#export M2_HOME=/usr/local/apache-maven  # rest of the world
-export PATH=$M2_HOME/bin:$PATH
+# export WORKSPACE=$HOME/perka
+# export ANDROID_HOME=$WORKSPACE/dev/android/android-sdk-macosx
+# export MAVEN_OPTS=-Xmx1536M
+# export PATH=$WORKSPACE/dev/bin:${M2_HOME}/bin:$ANDROID_HOME/platform-tools:$PATH
+# export PATH=/Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/:$PATH
+# export PATH=/usr/local/mysql/bin:$PATH
+# export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+# alias fastgulp="gulp gen && gulp -p admin,merchant,profile,validator"
+# alias fastmvn="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests"
+# alias build="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests clean install && notify 'BUILD DONE'"
+# alias resumefrom="fastmvn -T 1.5C clean install -rf"
+# alias findbugs="mvn -DskipCassandraTests -DskipDependencyChecks -DskipTests"
+# alias mvnpl="mvn clean install -pl "
+# alias pbs="~/myperka/scripts/pbs.sh"
+# alias notify="~/myperka/scripts/notify.sh"
+# alias starter="vim ~/.starter.json"
+# alias offshards="jq '.[\"jobs\"] | .[] | {\"name\", \"count\":.count} | select(.count < 1) | {\"name\"}' ~/.starter.json | grep -v \"{\" | grep -v \"}\" | awk -F: '{print \$2}'"
+# 
+# export ANDROID_HOME=$HOME/android-sdk-macosx/
+# export PATH=$ANDROID_HOME/tools:$PATH
+# export PATH=$ANDROID_HOME/platform-tools:$PATH
+# 
+# export M2_HOME=$WORKSPACE/dev/maven    # perka
+# #export M2_HOME=/usr/local/apache-maven  # rest of the world
+# export PATH=$M2_HOME/bin:$PATH
 #}}}
 
 
