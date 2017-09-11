@@ -28,6 +28,13 @@
     unstage = reset HEAD --
     review = push origin HEAD:refs/for/master
     rpull = pull --rebase
+
+    wdiff = diff --color-words --ignore-all-space
+    ldiff = difftool -y -t latex
+
+[difftool.latex]
+    cmd = latexdiff "$LOCAL" "$REMOTE"
+
 [merge]
     conflictstyle = diff3
 [rerere]
