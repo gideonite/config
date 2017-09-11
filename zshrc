@@ -121,7 +121,7 @@ zstyle ':completion:*' menu select # menu-style completion
 zstyle ':completion:*:functions' ignored-patterns '_*' # no missing completions
 # }}}
 # Bindkeys {{{
-bindkey -v                       # Use vim bindings
+bindkey -e                       # Use emacs bindings
 bindkey "^A" beginning-of-line   # Like in bash, for memory
 bindkey "^B" beginning-of-line   # This won't be screwed up by screen, but weird
 bindkey "^E" end-of-line         # Like in bash
@@ -166,12 +166,12 @@ alias proj='nocorrect proj'
 alias npm='nocorrect npm'
 alias valgrind='nocorrect valgrind'
 alias racket='nocorrect racket'
-alias pip='nocorrect pip'
+#alias pip='nocorrect pip'
 alias ipython='nocorrect ipython'
 alias locate='locate -i'            # always want to ignore case.
 alias prettyjson='python -m json.tool'
 alias dotperl='rsync -av lib/* ~/.perl/'
-alias downloads='cd /tmp/downloads && ls -lt | head -n 5'
+alias downloads='cd ~/Downloads && ls -lt | head -n 5'
 alias mvdownload="ls -t /tmp/downloads | head -n1 | sed -e 's/\n/\0/' | xargs -I{} cp /tmp/downloads/{}" # takes the latest downloaded file and moves it.
 alias i3lock='i3lock -c 000000'
 #alias octave='octave --no-gui'
@@ -208,6 +208,7 @@ alias hex='ssh dresdnerg@hex.inf.ethz.ch'
 alias pex2='ssh dresdnerg@pex2.inf.ethz.ch'
 alias eth='sudo openconnect https://sslvpn.ethz.ch -u dgideon'
 alias cornell='openconnect https://cuvpn.cuvpn.cornell.edu -u gmd87'
+alias usa='sshuttle -r gideon@mookmo.net 0.0.0.0/0 -vv'
 
 alias ssh_proxy='ssh -C2qTnN -D ' # https://calomel.org/firefox_ssh_proxy.html
 # }}}
@@ -243,7 +244,7 @@ alias tardecompress="tar -xvf"
 # sometimes the network-manager needs encouragement
 which /etc/init.d/network-manager>/dev/null && alias interet-restart='sudo /etc/init.d/network-manager restart'
 
-alias open='xdg-open'
+#alias open='xdg-open'
 
 # passwords
 which lpass>/dev/null && alias pwds='lpass show active-passwords'
@@ -270,6 +271,7 @@ aalias() {
     # Grabs the aliased value from within the quotes
     alias $1 | awk -F "'" '{print $2}'
 }
+
 # }}}
 # fortune {{{
 fortune 2>/dev/null #|| return 0 # essential!
