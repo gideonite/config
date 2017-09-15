@@ -24,7 +24,7 @@ typeset -U PATH
 # Latex
 export PATH=/usr/texbin:$PATH
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export IDEA_JDK=/usr/local/src/jdk1.7.0_45
 
@@ -44,7 +44,7 @@ export MAVEN_OPTS=-Xmx1536M
 export PATH=$WORKSPACE/dev/bin:${M2_HOME}/bin:$ANDROID_HOME/platform-tools:$PATH
 export PATH=/Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+#export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 alias fastgulp="gulp gen && gulp -p admin,merchant,profile,validator"
 alias fastmvn="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests"
 alias build="mvn -DskipCassandraTests -DskipDependencyChecks -DskipFindbugs -DskipTests clean install && notify 'BUILD DONE'"
@@ -220,7 +220,7 @@ alias agj="ag --ignore target"   # silver searcher that ignores the maven target
 alias agjs="ag --ignore-dir perka-client --ignore-dir flatpack"
 
 # sometimes the network-manager needs encouragement
-which /etc/init.d/network-manager>/dev/null && alias interet-restart='sudo /etc/init.d/network-manager restart'
+#which /etc/init.d/network-manager>/dev/null && alias interet-restart='sudo /etc/init.d/network-manager restart'
 
 # alias open='xdg-open'         # doesn't work on not on mac
 
