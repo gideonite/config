@@ -133,7 +133,9 @@ nnoremap <C-P> :bp<Enter>
 "TODO wrap in if-statement
 "TODO delete ctrlp extension
 let g:ctrlp_map = ''
-nnoremap <C-F> :Files<CR>
+set rtp+=/usr/local/opt/fzf " If installed using Homebrew
+nmap <C-F> :Files<CR>
+nmap <C-_> :Rg<CR> " vim sees _ as / - this is binding for C-/
 
 " Make ctrl-j and ctrl-k cycle through split windows in cmd mode
 nnoremap <C-J> :wincmd w<Enter>
