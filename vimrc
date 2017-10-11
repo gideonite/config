@@ -63,7 +63,7 @@ set shiftround    " < and > will hit indent levels instead of +-4 always
 " set tw=80       " Make hard CR every 80 lines
 " }}}
 " Inter-session stuff {{{
-" set viminfo='50,/50,:50,<50,n~/.viminfo
+set viminfo='50,/50,:50,<50,n~/.viminfo
 set history=100 " keep 100 lines of command line history
 set nobackup    " Don't back up stuff. (makes nasty files~)
 " }}}
@@ -125,11 +125,15 @@ let g:clam_autoreturn = 1
 nmap <leader>c <Plug>CommentaryLine
 xmap <leader>c <Plug>Commentary
 
-let g:ctrlp_map = '<C-F>'
-
 " Make ctrl-n and ctrl-p cycle through buffers in cmd mode
 nnoremap <C-N> :bn<Enter>
 nnoremap <C-P> :bp<Enter>
+
+"Only works with FZF.
+"TODO wrap in if-statement
+"TODO delete ctrlp extension
+let g:ctrlp_map = ''
+nnoremap <C-F> :Files<CR>
 
 " Make ctrl-j and ctrl-k cycle through split windows in cmd mode
 nnoremap <C-J> :wincmd w<Enter>
@@ -154,9 +158,15 @@ fu! JumpToTag()
 endfu
 nmap <C-b> :call JumpToTag() <CR>
 
-" kj exits insert mode
-" inoremap kj <Esc>
-" inoremap <C-i> <Esc>
+" Use ripgrep to search
+" TODO setup only if ripgrep is installed
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
 
 " }}}
 " Autocommands {{{
@@ -298,6 +308,24 @@ let g:gitgutter_enabled = 0
 " set number of colors to 16.  If it's 8, then solarized looks crappy in
 " screen
 set t_Co=16
+
+" Match fzf colors to color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" fzf layout - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
 
 " Rainbowy parens, braces, and brackets thanks to Eidolos{{{
 let g:rainbow         = 1 " Must be a more compact way of setting all these
