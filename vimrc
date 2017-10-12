@@ -85,6 +85,11 @@ let g:EnhCommentifyRespectIndent = 'Yes' " indent where I want you to indent
 set switchbuf=useopen " Jump to open window containing jump target if available
 set path=.,/usr/include,,** " recursively append everything in current directory for :find
 :set viminfo^=% " Remember open buffers
+
+" to enable smartcase, must first ignorecase
+set ignorecase
+set smartcase
+
 "}}}
 " Persistent undo {{{
 if exists("+undofile")
