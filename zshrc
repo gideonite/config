@@ -353,7 +353,7 @@ zle     -N   fzf-file-widget
 bindkey '^F' fzf-file-widget
 fzf-history-widget-accept() {
   fzf-history-widget
-  zle accept-line
+  #zle accept-line # run's the command without another <CR>
 }
 zle     -N     fzf-history-widget-accept
 bindkey '^R' fzf-history-widget-accept
