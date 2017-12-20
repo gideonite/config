@@ -141,14 +141,16 @@ let g:ctrlp_map = ''
 set rtp+=/usr/local/opt/fzf " If installed using Homebrew
 nmap <C-F> :Files<CR>
 nmap <C-_> :Rg<CR> " vim sees _ as / - this is binding for C-/
+nmap <C-H> :History:<CR>
 
 " Make ctrl-j and ctrl-k cycle through split windows in cmd mode
 nnoremap <C-J> :wincmd w<Enter>
 nnoremap <C-K> :wincmd W<Enter>
 
 " Make ctrl-h and ctrl-l cycle through tab pages in cmd mode
-nnoremap <C-H> :tabp<Enter>
-nnoremap <C-L> :tabn<Enter>
+" I never use this and don't even know what cmd mode is...
+"nnoremap <C-H> :tabp<Enter>
+"nnoremap <C-L> :tabn<Enter>
 
 " :w!! sudo-saves the current buffer
 cmap w!! w !sudo tee % >/dev/null
