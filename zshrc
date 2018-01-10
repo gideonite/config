@@ -23,7 +23,7 @@ fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
 export PLY_HOME=~/ext/ply/dist/ply
-export PATH=~/anaconda3/bin:~/.rbenv/bin:/usr/local/share/npm/bin/:~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=~/anaconda3/bin:/Library/TeX/texbin/:~/.rbenv/bin:/usr/local/share/npm/bin/:~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
 
 typeset -U PATH
 
@@ -204,7 +204,6 @@ alias nikola1='ssh gmd87@nikola-compute01.coecis.cornell.edu'
 alias nikola2='ssh gmd87@nikola-compute02.coecis.cornell.edu'
 alias nikola3='ssh gmd87@nikola-compute03.coecis.cornell.edu'
 alias nik1f='ssh -L 8080:localhost:8080 gmd87@nikola-compute01.coecis.cornell.edu'
-alias hex='ssh dresdnerg@hex.inf.ethz.ch'
 alias pex2='ssh dresdnerg@pex2.inf.ethz.ch'
 alias eth='sudo openconnect https://sslvpn.ethz.ch -u dgideon'
 alias cornell='openconnect https://cuvpn.cuvpn.cornell.edu -u gmd87'
