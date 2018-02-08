@@ -321,6 +321,9 @@ compctl -K _completemarks unmark
 alias j='jump'
 
 # }}}
+#{{{ leomed cluster
+alias bjobs='ssh lm bjobs'
+#}}}
 
 [[ $EMACS = t ]] && unsetopt zle
 
