@@ -61,6 +61,7 @@ set autoindent    " always set autoindenting on
 set smarttab      " Smart tabbing!
 set shiftround    " < and > will hit indent levels instead of +-4 always
 " set tw=80       " Make hard CR every 80 lines
+set modeline
 " }}}
 " Inter-session stuff {{{
 set viminfo='50,/50,:50,<50,n~/.viminfo
@@ -141,7 +142,8 @@ let g:ctrlp_map = ''
 set rtp+=/usr/local/opt/fzf " If installed using Homebrew
 nmap <C-F> :Files<CR>
 nmap <C-_> :Rg<CR> " vim sees _ as / - this is binding for C-/
-nmap <C-H> :History:<CR>
+nmap <C-H> :History<CR>
+nmap <C-b> :Buffers<CR>
 
 " Make ctrl-j and ctrl-k cycle through split windows in cmd mode
 nnoremap <C-J> :wincmd w<Enter>
@@ -165,7 +167,7 @@ fu! JumpToTag()
     let name = expand('<cword>')
     exe ":tag " . name
 endfu
-nmap <C-b> :call JumpToTag() <CR>
+"nmap <C-b> :call JumpToTag() <CR>
 
 " Use ripgrep to search
 " TODO setup only if ripgrep is installed
@@ -176,6 +178,8 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
+" Python insert breakpoint
+let @p = 'oimop€kb€kbport  pdb; i€kb€kb€kb€kb€kb€kb€kbpdb; pdb.set_trace()'
 
 " }}}
 " Autocommands {{{
