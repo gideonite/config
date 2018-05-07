@@ -46,7 +46,7 @@ export PORTAL_DATA_HOME=~/dev/cbio-portal/portal-data
 #}}}
 
 #{{{ bbbvi
-export BBVI=/Users/gideon/projects/projects2017-Boosting-VI/Code/bbbvi/
+export BBVI=/Users/gideon/projects/projects2017-Boosting-VI/Code/bbbvi/src
 #}}}
 
 
