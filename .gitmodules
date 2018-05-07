@@ -79,3 +79,6 @@
 [submodule "vim/bundle/julia-vim"]
 	path = vim/bundle/julia-vim
 	url = https://github.com/JuliaEditorSupport/julia-vim.git
+[submodule "vim/bundle/vim-sleuth"]
+	path = vim/bundle/vim-sleuth
+	url = https://github.com/tpope/vim-sleuth
