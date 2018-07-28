@@ -411,3 +411,7 @@ unset -f bind-git-helper
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# itermplot
+export MPLBACKEND="module://itermplot"
+export ITERMPLOT=rv
