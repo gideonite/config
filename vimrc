@@ -275,8 +275,8 @@ au BufRead,BufNewFile *.go set noexpandtab
 " highlight Search     None          ctermfg=lightred
 
 syntax enable
-" set background=dark
-"colorscheme solarized
+set background=dark
+colorscheme solarized
 
 let g:vimclojure#HighlightBuiltins = 1
 let g:vimclojure#HighlightContrib = 1
@@ -297,7 +297,8 @@ let g:gitgutter_enabled = 0
 
 " set number of colors to 16.  If it's 8, then solarized looks crappy in
 " screen
-" set t_Co=16
+"set t_Co=16
+let g:solarized_termcolors=256
 
 " Rainbowy parens, braces, and brackets thanks to Eidolos{{{
 let g:rainbow         = 1 " Must be a more compact way of setting all these
@@ -399,6 +400,21 @@ nmap <silent> de :call <SID>diffstop()<CR>
 let g:SuperTabMidWordCompletion = 0
 let g:SuperTabDefaultCompletionType = 'context'
 " }}}
+" {{{ Python breakpoints
+func! s:SetBreakpoint()
+    cal append('.', repeat(' ', strlen(matchstr(getline('.'), '^\s*'))) . 'import ipdb; ipdb.set_trace()')
+endf
+
+func! s:RemoveBreakpoint()
+    exe 'silent! g/^\s*import\sipdb\;\?\n*\s*ipdb.set_trace()/d'
+endf
+
+func! s:ToggleBreakpoint()
+    if getline('.')=~#'^\s*import\sipdb' | cal s:RemoveBreakpoint() | el | cal s:SetBreakpoint() | en
+endf
+nnoremap <F6> :call <SID>ToggleBreakpoint()<CR>
+" }}}
 " }}}
 
 " vim:fdm=marker commentstring="%s
+
