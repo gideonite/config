@@ -14,6 +14,7 @@ Plug 'tpope/vim-endwise'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
