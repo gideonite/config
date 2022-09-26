@@ -7,14 +7,13 @@
 " call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-unimpaired.git'
-Plug 'tpope/vim-fugitive.git'
-Plug 'tpope/vim-surround.git'
-Plug 'tpope/vim-endwise.git'
-Plug 'vim-scripts/matchit.zip.git'
-Plug 'altercation/vim-colors-solarized.git'
-Plug 'tpope/vim-commentary.git'
-Plug 'junegunn/fzf.vim.git'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-commentary'
+Plug 'junegunn/fzf.vim'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
