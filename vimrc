@@ -61,9 +61,10 @@ set autoindent    " always set autoindenting on
 set smarttab      " Smart tabbing!
 set shiftround    " < and > will hit indent levels instead of +-4 always
 " set tw=80       " Make hard CR every 80 lines
+set modeline
 " }}}
 " Inter-session stuff {{{
-" set viminfo='50,/50,:50,<50,n~/.viminfo
+set viminfo='50,/50,:50,<50,n~/.viminfo
 set history=100 " keep 100 lines of command line history
 set nobackup    " Don't back up stuff. (makes nasty files~)
 " }}}
@@ -85,6 +86,11 @@ let g:EnhCommentifyRespectIndent = 'Yes' " indent where I want you to indent
 set switchbuf=useopen " Jump to open window containing jump target if available
 set path=.,/usr/include,,** " recursively append everything in current directory for :find
 :set viminfo^=% " Remember open buffers
+
+" to enable smartcase, must first ignorecase
+set ignorecase
+set smartcase
+
 "}}}
 " Persistent undo {{{
 if exists("+undofile")
@@ -125,19 +131,28 @@ let g:clam_autoreturn = 1
 nmap <leader>c <Plug>CommentaryLine
 xmap <leader>c <Plug>Commentary
 
-let g:ctrlp_map = '<C-F>'
-
 " Make ctrl-n and ctrl-p cycle through buffers in cmd mode
 nnoremap <C-N> :bn<Enter>
 nnoremap <C-P> :bp<Enter>
+
+"Only works with FZF.
+"TODO wrap in if-statement
+"TODO delete ctrlp extension
+let g:ctrlp_map = ''
+set rtp+=/usr/local/opt/fzf " If installed using Homebrew
+nmap <C-F> :Files<CR>
+nmap <C-_> :Rg<CR> " vim sees _ as / - this is binding for C-/
+nmap <C-H> :History<CR>
+nmap <C-b> :Buffers<CR>
 
 " Make ctrl-j and ctrl-k cycle through split windows in cmd mode
 nnoremap <C-J> :wincmd w<Enter>
 nnoremap <C-K> :wincmd W<Enter>
 
 " Make ctrl-h and ctrl-l cycle through tab pages in cmd mode
-nnoremap <C-H> :tabp<Enter>
-nnoremap <C-L> :tabn<Enter>
+" I never use this and don't even know what cmd mode is...
+"nnoremap <C-H> :tabp<Enter>
+"nnoremap <C-L> :tabn<Enter>
 
 " :w!! sudo-saves the current buffer
 cmap w!! w !sudo tee % >/dev/null
@@ -152,11 +167,19 @@ fu! JumpToTag()
     let name = expand('<cword>')
     exe ":tag " . name
 endfu
-nmap <C-b> :call JumpToTag() <CR>
+"nmap <C-b> :call JumpToTag() <CR>
 
-" kj exits insert mode
-" inoremap kj <Esc>
-" inoremap <C-i> <Esc>
+" Use ripgrep to search
+" TODO setup only if ripgrep is installed
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Python insert breakpoint
+let @p = 'oimop€kb€kbport  pdb; i€kb€kb€kb€kb€kb€kb€kbpdb; pdb.set_trace()'
 
 " }}}
 " Autocommands {{{
@@ -298,6 +321,24 @@ let g:gitgutter_enabled = 0
 " set number of colors to 16.  If it's 8, then solarized looks crappy in
 " screen
 " set t_Co=16
+
+" Match fzf colors to color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" fzf layout - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
 
 " Rainbowy parens, braces, and brackets thanks to Eidolos{{{
 let g:rainbow         = 1 " Must be a more compact way of setting all these

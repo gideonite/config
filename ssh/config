@@ -1,0 +1,34 @@
+Host lm
+  User dresdnerg
+  #HostName login.leomed.ethz.ch --- one is the loneliest number
+  HostName lm-login-02.login.leomed.ethz.ch
+  ProxyCommand ssh dresdnerg@hex.ethz.ch -W %h:22
+  RemoteForward 9001 proxy.ethz.ch:3128
+  RemoteForward 8890 github.com:22
+  TCPKeepAlive yes
+
+Host lm1
+  User dresdnerg
+  #HostName login.leomed.ethz.ch --- one is the loneliest number
+  HostName lm-login-01.login.leomed.ethz.ch
+  ProxyCommand ssh dresdnerg@hex.ethz.ch -W %h:22
+  RemoteForward 9001 proxy.ethz.ch:3128
+  RemoteForward 8890 github.com:22
+  TCPKeepAlive yes
+
+Host lm2
+  User dresdnerg
+  #HostName login.leomed.ethz.ch --- one is the loneliest number
+  HostName lm-login-02.login.leomed.ethz.ch
+  ProxyCommand ssh dresdnerg@hex.ethz.ch -W %h:22
+  RemoteForward 9001 proxy.ethz.ch:3128
+  RemoteForward 8890 github.com:22
+  TCPKeepAlive yes
+
+Host mookmo
+    User gideon
+    HostName mookmo.net
+
+Host hex
+    User dresdnerg
+    HostName hex.inf.ethz.ch

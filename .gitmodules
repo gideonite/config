@@ -73,6 +73,15 @@
 [submodule "vim/bundle/timl/"]
 	path = vim/bundle/timl
 	url = https://github.com/tpope/timl.git
-[submodule "vim/bundle/julia-vim/"]
+[submodule "vim/bundle/fzf.vim"]
+	path = vim/bundle/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule "vim/bundle/julia-vim"]
 	path = vim/bundle/julia-vim
-	url = git://github.com/JuliaLang/julia-vim.git
+	url = https://github.com/JuliaEditorSupport/julia-vim.git
+[submodule "vim/bundle/vim-sleuth"]
+	path = vim/bundle/vim-sleuth
+	url = https://github.com/tpope/vim-sleuth
+[submodule "vim/bundle/vim-obsession"]
+	path = vim/bundle/vim-obsession
+	url = git://github.com/tpope/vim-obsession.git

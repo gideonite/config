@@ -28,6 +28,14 @@
     unstage = reset HEAD --
     review = push origin HEAD:refs/for/master
     rpull = pull --rebase
+
+    wdiff = diff --color-words --ignore-all-space
+    ldiff = difftool -y -t latex
+	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+
+[difftool.latex]
+    cmd = latexdiff "$LOCAL" "$REMOTE"
+
 [merge]
     conflictstyle = diff3
 [rerere]
