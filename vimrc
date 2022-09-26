@@ -1,6 +1,26 @@
 " .vimrc by Jordan Lewis
 " and Gideon Dresdner
 "
+" {{{ Plugins
+
+" Plugins will be downloaded under the specified directory.
+#call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+call plug#begin('~/.vim/plugged')
+
+Plug 'tpope/vim-unimpaired.git'
+Plug 'tpope/vim-fugitive.git'
+Plug 'tpope/vim-surround.git'
+Plug 'tpope/vim-endwise.git'
+Plug 'vim-scripts/matchit.zip.git'
+Plug 'altercation/vim-colors-solarized.git'
+Plug 'tpope/vim-commentary.git'
+Plug 'junegunn/fzf.vim.git'
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
+
+" }}}
 " Settings {{{
 " General {{{
 set autowrite          " Flush to disk when using :make and stuff
@@ -17,7 +37,6 @@ set nostartofline      " Don't move to start of line on buffer next
 set shell=/bin/bash    " zsh screws up
 set ttimeoutlen=50     " 50 milliseconds for esc timeout instead of 1000
 set ttyfast            " We are always going to be using a fast terminal.
-call pathogen#infect()
 filetype plugin indent on " File type detection on, (cindent for .c etc)
 " }}}
 " Appearance {{{
