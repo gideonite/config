@@ -153,6 +153,9 @@ alias gdl='git diff --name-only'
 alias gch='git checkout'
 alias glg='git lg'
 
+# os x pdf reader
+alias skim='open -a skim'
+
 # }}}
 # Shells {{{
 alias mookmo='ssh gideon@mookmo.net'

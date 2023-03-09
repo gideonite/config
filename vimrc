@@ -16,6 +16,11 @@ Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
 
+" Org mode
+Plug 'jceb/vim-orgmode'
+Plug 'tpope/vim-speeddating'
+Plug 'vim-scripts/utl.vim'
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
