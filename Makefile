@@ -34,7 +34,7 @@ ZSHBUNDLES = $(patsubst %,zsh/func/%/.git,$(ZSHBUNDLEFILES))
 
 all: build
 
-install: build $(TARGETS) ~/.vimundo
+install: build $(TARGETS)
 
 $(DEST)/.% : %
 	@mkdir -p $(dir $@)
