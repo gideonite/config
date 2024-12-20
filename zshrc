@@ -38,6 +38,10 @@ export IDEA_JDK=/usr/local/src/jdk1.7.0_45
 ulimit -S -n 2048
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+
+# gsutil
+export CLOUDSDK_PYTHON=$(pyenv prefix 3.11.10)/bin/python
+
 #{{{ cBioPortal
 export PORTAL_HOME=~/dev/cbio-portal
 export CGDS_HOME=~/dev/cbio-portal/portal
@@ -152,6 +156,7 @@ alias gd='git diff'
 alias gdl='git diff --name-only'
 alias gch='git checkout'
 alias glg='git lg'
+alias gp='git push -u origin HEAD'
 
 # os x pdf reader
 alias skim='open -a skim'
@@ -360,14 +365,14 @@ gt() {
     --preview 'git show --color=always {} | head -'$LINES
 }
 
-gh() {
-  is_in_git_repo || return
-  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
-  fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-    --header 'Press CTRL-S to toggle sort' \
-    --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
-  grep -o "[a-f0-9]\{7,\}"
-}
+#gh() {
+#  is_in_git_repo || return
+#  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
+#  fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+#    --header 'Press CTRL-S to toggle sort' \
+#    --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
+#  grep -o "[a-f0-9]\{7,\}"
+#}
 
 gr() {
   is_in_git_repo || return
@@ -406,6 +411,37 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+alias ginst='gcloud compute instances list'
+alias gstart='gcloud compute instances start'
+alias gstop='gcloud compute instances stop'
+
 # itermplot
-export MPLBACKEND="module://itermplot"
-export ITERMPLOT=rv
+#export MPLBACKEND="module://itermplot"
+#export ITERMPLOT=rv
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/gideon/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gideon/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/gideon/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gideon/google-cloud-sdk/completion.zsh.inc'; fi
+# export PATH="/opt/homebrew/anaconda3/bin:$PATH"  # commented out by conda initialize
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
