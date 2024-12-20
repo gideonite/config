@@ -405,7 +405,3 @@ else
 fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# itermplot
-export MPLBACKEND="module://itermplot"
-export ITERMPLOT=rv
