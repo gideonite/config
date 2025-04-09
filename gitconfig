@@ -32,7 +32,7 @@
     wdiff = diff --color-words --ignore-all-space
     ldiff = difftool -y -t latex
     ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
-    b = "branch --sort=-committerdate"
+    b = "branch -vv --sort=-committerdate"
 
 [difftool.latex]
     cmd = latexdiff "$LOCAL" "$REMOTE"
