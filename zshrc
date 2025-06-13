@@ -21,7 +21,6 @@ else
     export CLICOLOR=1
 fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
-export PERL5LIB='/Users/jlewis/.perl/'
 export PLY_HOME=~/ext/ply/dist/ply
 export PATH=~/anaconda3/bin:/Library/TeX/texbin:~/.rbenv/bin:/usr/local/share/npm/bin/:~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
 
@@ -358,12 +357,12 @@ gb() {
   sed 's#^remotes/##'
 }
 
-gt() {
-  is_in_git_repo || return
-  git tag --sort -version:refname |
-  fzf-down --multi --preview-window right:70% \
-    --preview 'git show --color=always {} | head -'$LINES
-}
+#gt() {
+#  is_in_git_repo || return
+#  git tag --sort -version:refname |
+#  fzf-down --multi --preview-window right:70% \
+#    --preview 'git show --color=always {} | head -'$LINES
+#}
 
 #gh() {
 #  is_in_git_repo || return
@@ -414,10 +413,13 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 alias ginst='gcloud compute instances list'
 alias gstart='gcloud compute instances start'
 alias gstop='gcloud compute instances stop'
+alias config-ssh='gcloud compute config-ssh'
 
 # itermplot
 #export MPLBACKEND="module://itermplot"
 #export ITERMPLOT=rv
+
+export LANGUAGE="en_US.UTF-8"
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -429,6 +431,11 @@ if [ -f '/Users/gideon/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gideon/g
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/gideon/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gideon/google-cloud-sdk/completion.zsh.inc'; fi
 # export PATH="/opt/homebrew/anaconda3/bin:$PATH"  # commented out by conda initialize
+
+# {{{ aider
+alias aider='aider --model ollama_chat/qwen:4b --no-gitignore --vim'
+export OLLAMA_API_BASE=http://127.0.0.1:11434
+# }}}
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

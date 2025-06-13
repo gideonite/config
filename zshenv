@@ -11,3 +11,6 @@ for f in $HOME/.zsh/func/* $HOME/.zsh/func/*/*; do
     fi
 done
 typeset -U fpath
+
+# uv
+export PATH="/Users/gideon/.local/bin:$PATH"

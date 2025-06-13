@@ -1,6 +1,6 @@
 [core]
     editor = vim
-    excludesfile = ~/.gitignore
+	excludesfile = /Users/gideon/.gitignore_global
 [user]
     email = gideond@gmail.com
     name = Gideon Dresdner
