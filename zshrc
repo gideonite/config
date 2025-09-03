@@ -138,6 +138,7 @@ alias valgrind='nocorrect valgrind'
 alias racket='nocorrect racket'
 #alias pip='nocorrect pip'
 alias ipython='nocorrect ipython'
+alias ipdb="python -m ipdb"
 alias locate='locate -i'            # always want to ignore case.
 alias prettyjson='python -m json.tool'
 alias dotperl='rsync -av lib/* ~/.perl/'
@@ -288,6 +289,14 @@ alias j='jump'
 alias bjobs='ssh lm bjobs'
 alias bpeek='ssh lm bpeek'
 #}}}
+
+# trash instead of rm {{{
+if command -v trash-put >/dev/null 2>&1; then
+    alias rm='trash-put'
+else
+    alias rm='/bin/rm -i'
+fi
+# }}}
 
 [[ $EMACS = t ]] && unsetopt zle
 
