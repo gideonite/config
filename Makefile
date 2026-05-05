@@ -8,6 +8,7 @@ Xmodmap \
 config/awesome/rc.lua \
 gitconfig \
 screenrc \
+tmux.conf \
 vim \
 vimrc \
 zprofile \
