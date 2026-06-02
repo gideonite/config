@@ -6,6 +6,7 @@ CONFIGS = \
 Xdefaults \
 Xmodmap \
 config/awesome/rc.lua \
+config/ghostty/config \
 gitconfig \
 screenrc \
 tmux.conf \
