@@ -7,3 +7,10 @@ shell-integration-features = no-cursor,ssh-terminfo,ssh-env
 # Toggle the Quake-style quick terminal from anywhere (Cmd+`).
 # `global:` requires Accessibility permissions for Ghostty on macOS.
 keybind = global:cmd+backquote=toggle_quick_terminal
+
+# Drop the quick terminal in as a centered floating panel rather than a
+# full-width slab. Size is width,height as a percentage of the screen, so
+# it scales sanely between a large external display and a laptop.
+# NOTE: changing quick-terminal-position requires a full Ghostty restart.
+quick-terminal-position = center
+quick-terminal-size = 60%,55%
