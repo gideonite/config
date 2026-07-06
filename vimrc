@@ -61,6 +61,12 @@ set ruler             " Show current cursor position
 set rulerformat=%25(%=%M%R\ (%n)%l,%c\ %P%)
 set scrolloff=3       " Scroll screen at 3 lines from top/bottom
 
+" Ghostty: line cursor in insert mode, block in normal mode
+if $TERM ==# 'xterm-ghostty'
+    let &t_SI = "\e[6 q"
+    let &t_EI = "\e[2 q"
+endif
+
 " o overwrite message for writing a file with subsequent message
 " O message for reading a file overwrites any previous message.
 " t truncate file message at the start if it is too long to fit. -> <
@@ -201,9 +207,6 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-
-" Python insert breakpoint
-let @p = 'oimop€kb€kbport  pdb; i€kb€kb€kb€kb€kb€kb€kbpdb; pdb.set_trace()'
 
 " }}}
 " Autocommands {{{
