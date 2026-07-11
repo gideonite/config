@@ -5,6 +5,7 @@ DEST = $(HOME)
 CONFIGS = \
 Xdefaults \
 Xmodmap \
+claude/CLAUDE.md \
 config/awesome/rc.lua \
 config/ghostty/config \
 gitconfig \
