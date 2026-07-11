@@ -180,7 +180,7 @@ add-zsh-hook precmd gitinfo_precmd
 PS1='%F{yellow}[%T%F{cyan}%1(j.%%%F{green}%j%F{cyan}.)%0(?..:%F{red}%B%?%b)%F{yellow}]%F{cyan}%# %f'
 zmx_rps=""
 if [[ -n $ZMX_SESSION ]]; then
-	zmx_rps="%F{magenta}$ZMX_SESSION%f "
+	zmx_rps="%F{magenta}[$ZMX_SESSION]%f "
 fi
 RPS1='${zmx_rps}%100>..>%F{cyan}%n%f%B@%b%F{cyan}%m%f%B:%b%<<%F{cyan}$(git_path)$gitinfo[msg]%b%k%f'
 
