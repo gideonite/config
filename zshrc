@@ -423,7 +423,7 @@ zmx-select() {
     --reverse \
     --prompt="zmx> " \
     --header="Enter: select | Ctrl-N: create new" \
-    --preview='ZMX_SESSION_PREFIX= zmx history {1}' \
+    --preview='zmx history {1}' \
     --preview-window=right:60%:follow \
   )
   local rc=$?
@@ -452,6 +452,12 @@ zmx-select-widget() {
 }
 zle -N zmx-select-widget
 bindkey '^p' zmx-select-widget
+
+# install completions
+if command -v zmx &> /dev/null; then
+  eval "$(zmx completions zsh)"
+fi
+
 #}}}
 
 # must be at end of file
