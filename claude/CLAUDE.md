@@ -19,3 +19,13 @@ Session naming:
 Remote machines:
 - When working on a remote machine, use zmx sessions there too, with
   the same `ai.` prefix and per-feature scoping rules.
+
+## Machine-specific instructions
+
+Anything specific to one machine — work setup on a dev box, personal
+setup on a laptop — goes in `~/.claude/CLAUDE.local.md`, which is not
+tracked in this repo. `make install` creates it empty and never
+overwrites it, so each machine keeps its own overrides while this file
+stays common across all of them.
+
+@~/.claude/CLAUDE.local.md

@@ -37,7 +37,14 @@ ZSHBUNDLES = $(patsubst %,zsh/func/%/.git,$(ZSHBUNDLEFILES))
 
 all: build
 
-install: build $(TARGETS)
+install: build $(TARGETS) $(DEST)/.claude/CLAUDE.local.md
+
+# Per-machine Claude instructions, imported by ~/.claude/CLAUDE.md.
+# Created empty when absent and never overwritten, so each machine keeps
+# its own overrides.
+$(DEST)/.claude/CLAUDE.local.md:
+	@mkdir -p $(dir $@)
+	touch $@
 
 $(DEST)/.% : %
 	@mkdir -p $(dir $@)
