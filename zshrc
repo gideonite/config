@@ -423,7 +423,7 @@ zmx-select() {
     --reverse \
     --prompt="zmx> " \
     --header="Enter: select | Ctrl-N: create new" \
-    --preview='zmx history {1}' \
+    --preview='ZMX_SESSION_PREFIX= zmx history {1}' \
     --preview-window=right:60%:follow \
   )
   local rc=$?
