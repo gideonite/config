@@ -5,7 +5,6 @@ DEST = $(HOME)
 CONFIGS = \
 Xdefaults \
 Xmodmap \
-claude/CLAUDE.md \
 config/awesome/rc.lua \
 config/ghostty/config \
 gitconfig \
@@ -37,12 +36,27 @@ ZSHBUNDLES = $(patsubst %,zsh/func/%/.git,$(ZSHBUNDLEFILES))
 
 all: build
 
-install: build $(TARGETS) $(DEST)/.claude/CLAUDE.local.md
+install: build $(TARGETS) $(DEST)/AGENTS.md $(DEST)/.claude/CLAUDE.md $(DEST)/AGENTS.local.md
 
-# Per-machine Claude instructions, imported by ~/.claude/CLAUDE.md.
-# Created empty when absent and never overwritten, so each machine keeps
-# its own overrides.
-$(DEST)/.claude/CLAUDE.local.md:
+# Shared, agent-agnostic instructions. agents/AGENTS.md is the single
+# source of truth; the locations different agents look for are symlinked
+# to it here.
+#
+# - ~/AGENTS.md          : the emerging cross-agent convention (Codex, pi, ...)
+# - ~/.claude/CLAUDE.md  : Claude Code still looks here
+$(DEST)/AGENTS.md: agents/AGENTS.md
+	@mkdir -p $(dir $@)
+	@[ ! -e $@ ] || [ -h $@ ] || mv -f $@ $@.bak
+	ln -sf $(PWD)/agents/AGENTS.md $@
+
+$(DEST)/.claude/CLAUDE.md: agents/AGENTS.md
+	@mkdir -p $(dir $@)
+	@[ ! -e $@ ] || [ -h $@ ] || mv -f $@ $@.bak
+	ln -sf $(PWD)/agents/AGENTS.md $@
+
+# Per-machine instructions, imported by AGENTS.md. Created empty when
+# absent and never overwritten, so each machine keeps its own overrides.
+$(DEST)/AGENTS.local.md:
 	@mkdir -p $(dir $@)
 	touch $@
 
