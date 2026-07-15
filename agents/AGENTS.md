@@ -1,4 +1,9 @@
-# Global instructions for Claude Code
+# Global instructions for coding agents
+
+These are agent-agnostic instructions shared across whatever coding
+agent I happen to be using (Claude Code, Codex, pi, etc.). This file is
+the single source of truth; per-agent config locations are symlinked to
+it by `make install`.
 
 ## Terminal sessions: use zmx
 
@@ -23,9 +28,9 @@ Remote machines:
 ## Machine-specific instructions
 
 Anything specific to one machine — work setup on a dev box, personal
-setup on a laptop — goes in `~/.claude/CLAUDE.local.md`, which is not
-tracked in this repo. `make install` creates it empty and never
-overwrites it, so each machine keeps its own overrides while this file
-stays common across all of them.
+setup on a laptop — goes in `~/AGENTS.local.md`, which is not tracked in
+this repo. `make install` creates it empty and never overwrites it, so
+each machine keeps its own overrides while this file stays common across
+all of them.
 
-@~/.claude/CLAUDE.local.md
+@~/AGENTS.local.md
