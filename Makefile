@@ -36,15 +36,15 @@ ZSHBUNDLES = $(patsubst %,zsh/func/%/.git,$(ZSHBUNDLEFILES))
 
 all: build
 
-install: build $(TARGETS) $(DEST)/AGENTS.md $(DEST)/.claude/CLAUDE.md $(DEST)/AGENTS.local.md
+install: build $(TARGETS) $(DEST)/.codex/AGENTS.md $(DEST)/.claude/CLAUDE.md $(DEST)/.config/agents/AGENTS.local.md
 
 # Shared, agent-agnostic instructions. agents/AGENTS.md is the single
-# source of truth; the locations different agents look for are symlinked
-# to it here.
+# source of truth; it is symlinked only into each tool's own global
+# config location, so nothing lands directly in the home directory.
 #
-# - ~/AGENTS.md          : the emerging cross-agent convention (Codex, pi, ...)
-# - ~/.claude/CLAUDE.md  : Claude Code still looks here
-$(DEST)/AGENTS.md: agents/AGENTS.md
+# - ~/.codex/AGENTS.md   : Codex's global instructions
+# - ~/.claude/CLAUDE.md  : Claude Code's global instructions
+$(DEST)/.codex/AGENTS.md: agents/AGENTS.md
 	@mkdir -p $(dir $@)
 	@[ ! -e $@ ] || [ -h $@ ] || mv -f $@ $@.bak
 	ln -sf $(PWD)/agents/AGENTS.md $@
@@ -56,7 +56,7 @@ $(DEST)/.claude/CLAUDE.md: agents/AGENTS.md
 
 # Per-machine instructions, imported by AGENTS.md. Created empty when
 # absent and never overwritten, so each machine keeps its own overrides.
-$(DEST)/AGENTS.local.md:
+$(DEST)/.config/agents/AGENTS.local.md:
 	@mkdir -p $(dir $@)
 	touch $@
 
