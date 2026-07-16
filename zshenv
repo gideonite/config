@@ -3,7 +3,6 @@ if [ -x /usr/libexec/path_helper ]; then
 fi
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export ZMX_SESSION_PREFIX="d."
 
 fpath=($fpath $HOME/.zsh/func)
 for f in $HOME/.zsh/func/* $HOME/.zsh/func/*/*; do
