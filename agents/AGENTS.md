@@ -25,6 +25,14 @@ Remote machines:
 - When working on a remote machine, use zmx sessions there too, with
   the same `ai.` prefix and per-feature scoping rules.
 
+## Docstrings
+
+Keep each context-setting preamble to three to five sentences. Remove the
+preamble when the code already makes the purpose clear.
+
+Do not use a blanket line limit. Keep measurements, schema traps, compatibility
+constraints, and other facts that the code cannot express.
+
 ## Machine-specific instructions
 
 Anything specific to one machine — work setup on a dev box, personal
