@@ -2,7 +2,7 @@
     editor = vim
     excludesfile = ~/.gitignore
 [user]
-    email = gideond@gmail.com
+	email = gideond@gmail.com
     name = Gideon Dresdner
 [github]
     user = gideonite
@@ -43,3 +43,12 @@
     enabled = 1
 [push]
 	default = matching
+[pull]
+	rebase = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[diff]
+	external = difft
