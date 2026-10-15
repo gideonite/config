@@ -512,9 +512,9 @@ export AWS_PROFILE=PowerUserAccess-manas-ai-inc-us-east-2
 MANAS_DEV_ALIAS=gideon
 
 # Start agent if not already running
-if [ -z "$SSH_AUTH_SOCK" ]; then
-  eval "$(ssh-agent -s)"
-  ssh-add ~/.ssh/id_rsa
+if [[ -o interactive && -z "$SSH_AUTH_SOCK" ]] && command -v ssh-agent >/dev/null; then
+  eval "$(ssh-agent -s)" >/dev/null
+  [ -f ~/.ssh/id_rsa ] && ssh-add ~/.ssh/id_rsa
 fi
 
 # >>> conda initialize >>>
