@@ -1,0 +1,122 @@
+#!/usr/bin/env python3
+"""Print a per-node GPU usage table for the running jobs in a SLURM partition.
+
+Usage: slurm-gpu-status [--host HOST] [--partition PARTITION]
+
+The script opens one SSH session to the SLURM control node. In that session it
+runs `nvidia-smi` inside each running job with `srun --overlap`, so the jobs
+are not disturbed. The output is one snapshot, not a time average.
+
+A node with no running job in the partition does not appear in the table.
+The utilization of a GPU is the share of the last sample window in which a
+kernel ran. It does not measure throughput.
+"""
+
+import argparse
+import subprocess
+import sys
+
+# Runs on the control node. $1 is the partition. Each `srun` runs one task per
+# node of the job and prefixes every `nvidia-smi` row with the short hostname.
+REMOTE_SCRIPT = r"""
+part=$1
+dir=$(mktemp -d)
+trap 'rm -rf "$dir"' EXIT
+squeue -h -p "$part" -t R -o '%i|%D' > "$dir/jobs"
+while IFS='|' read -r job nodes; do
+  srun --overlap --jobid="$job" -N "$nodes" --ntasks-per-node=1 bash -c '
+    h=$(hostname -s)
+    nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total,power.draw \
+      --format=csv,noheader,nounits | sed "s/^/$h, /"
+  ' > "$dir/$job.out" 2> "$dir/$job.err" < /dev/null &
+done < "$dir/jobs"
+wait
+while IFS='|' read -r job nodes; do
+  echo "JOB|$job"
+  cat "$dir/$job.out"
+  sed 's/^/ERR|/' "$dir/$job.err"
+done < "$dir/jobs"
+"""
+
+
+def collect(*, host: str, partition: str) -> tuple[dict, list[str]]:
+    """Return ({node: {"job": id, "gpus": [(util, mem, mem_total, power)]}}, errors)."""
+    result = subprocess.run(
+        ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=20", host, "bash", "-s", "--", partition],
+        input=REMOTE_SCRIPT,
+        capture_output=True,
+        text=True,
+        timeout=180,
+    )
+    if result.returncode != 0:
+        sys.exit(f"ssh to {host} failed:\n{result.stderr.strip()}")
+
+    nodes: dict[str, dict] = {}
+    errors: list[str] = []
+    job = ""
+    for line in result.stdout.splitlines():
+        if line.startswith("JOB|"):
+            job = line.split("|", 1)[1]
+        elif line.startswith("ERR|"):
+            errors.append(f"job {job}: {line[4:]}")
+        elif line.strip():
+            name, util, mem, mem_total, power = [field.strip() for field in line.split(",")]
+            entry = nodes.setdefault(name, {"job": job, "gpus": []})
+            entry["gpus"].append((float(util), float(mem), float(mem_total), float(power)))
+    return nodes, errors
+
+
+def summarize(gpus: list[tuple[float, float, float, float]]) -> list[str]:
+    """Return the table cells for a group of GPUs, after the node and job cells."""
+    count = len(gpus)
+    busy = sum(1 for util, *_ in gpus if util > 0)
+    util = sum(g[0] for g in gpus) / count
+    mem = sum(g[1] for g in gpus) / count
+    mem_total = sum(g[2] for g in gpus) / count
+    power = sum(g[3] for g in gpus) / count
+    return [
+        f"{busy}/{count}",
+        f"{util:.1f}%",
+        f"{mem / 1024:.1f} GiB ({100 * mem / mem_total:.0f}%)",
+        f"{power:.0f} W",
+    ]
+
+
+def render(rows: list[list[str]], *, header: list[str], total_row: list[str]) -> str:
+    table = [header, *rows, total_row]
+    widths = [max(len(row[i]) for row in table) for i in range(len(header))]
+
+    def fmt(row: list[str]) -> str:
+        return "| " + " | ".join(cell.ljust(width) for cell, width in zip(row, widths)) + " |"
+
+    divider = "|" + "|".join("-" * (width + 2) for width in widths) + "|"
+    lines = [fmt(header), divider, *(fmt(row) for row in rows), fmt(total_row)]
+    return "\n".join(lines)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--host", default="sa-control", help="SSH host alias of the SLURM control node")
+    parser.add_argument("--partition", default="dev", help="SLURM partition to summarize")
+    args = parser.parse_args()
+
+    nodes, errors = collect(host=args.host, partition=args.partition)
+    for error in errors:
+        print(f"warning: {error}", file=sys.stderr)
+    if not nodes:
+        sys.exit(f"No GPU data for running jobs in partition '{args.partition}'.")
+
+    rows = []
+    all_gpus = []
+    for index, (name, entry) in enumerate(sorted(nodes.items()), start=1):
+        all_gpus.extend(entry["gpus"])
+        rows.append([str(index), name, entry["job"], *summarize(entry["gpus"])])
+
+    header = ["#", "Node", "Job", "GPUs busy", "Avg GPU util", "Avg memory used", "Avg power"]
+    total_row = ["", "**All GPUs**", "", *summarize(all_gpus)]
+    total_row[3] = f"**{total_row[3]}**"
+    print(render(rows, header=header, total_row=total_row))
+
+
+if __name__ == "__main__":
+    main()
