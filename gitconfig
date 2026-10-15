@@ -2,7 +2,7 @@
     editor = vim
     excludesfile = ~/.gitignore
 [user]
-    email = gideond@gmail.com
+	email = gideond@gmail.com
     name = Gideon Dresdner
 [github]
     user = gideonite
@@ -11,6 +11,7 @@
 [alias]
     ci = commit
     co = checkout
+    dft = difftool
 
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
@@ -43,3 +44,16 @@
     enabled = 1
 [push]
 	default = matching
+[pull]
+	rebase = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[diff]
+	tool = difftastic
+[difftool]
+	prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"

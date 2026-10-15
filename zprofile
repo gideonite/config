@@ -4,7 +4,6 @@ if which keychain>/dev/null; then
   source ~/.keychain/$(hostname)-sh > /dev/null
 fi
 
-export PATH="$HOME/.cargo/bin:$PATH"
 
 
 if [ $(uname) = Darwin ]; then

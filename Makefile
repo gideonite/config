@@ -59,7 +59,7 @@ $(DEST)/.claude/CLAUDE.md: agents/AGENTS.md
 # absent and never overwritten, so each machine keeps its own overrides.
 $(DEST)/AGENTS.local.md:
 	@mkdir -p $(dir $@)
-	touch $@
+	@if [ -f $(DEST)/.claude/CLAUDE.local.md ]; then cp $(DEST)/.claude/CLAUDE.local.md $@; else touch $@; fi
 
 $(DEST)/.% : %
 	@mkdir -p $(dir $@)
