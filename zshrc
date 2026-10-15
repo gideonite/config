@@ -94,9 +94,11 @@ zstyle ':completion:*:functions' ignored-patterns '_*' # no missing completions
 # word you type is a prefix of `d.` or `sac.`, or starts with one of them.
 # Each list is cached for 30 seconds so each Tab press does not open an ssh call.
 _zmx_session_hosts() {
+  setopt localoptions extendedglob
   local prefix=$1 host=$2 tmp
   [[ -n $PREFIX && ( $prefix == $PREFIX* || $PREFIX == $prefix* ) ]] || return
   local cache=~/.zshcache/zmx-sessions-$host
+  mkdir -p ~/.zshcache
   if [[ ! -f $cache || -n $cache(#qN.ms+30) ]]; then
     tmp=$(ssh -o BatchMode=yes -o ConnectTimeout=5 $host 'zmx list --short' 2>/dev/null) &&
       print -r -- ${(F)${(M)${(f)tmp}:#${prefix}*}} >| $cache
@@ -479,7 +481,9 @@ fi
 # Manas
 #alias claude='claude --add-dir ~/projects/engineering-handbook'
 export SCHRODINGER=/opt/schrodinger/suites2026-1
-export FLYTE_API_KEY=$(security find-generic-password -a "$USER" -s flyte-api-key -w)
+if [ $(uname) = Darwin ]; then
+  export FLYTE_API_KEY=$(security find-generic-password -a "$USER" -s flyte-api-key -w 2>/dev/null)
+fi
 
 # must be at end of file
 
@@ -500,7 +504,8 @@ export PATH="/Users/gideon/.bun/bin:$PATH"
 alias lg='lazygit'
 
 # zsh-autosuggestions
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] &&
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export AWS_PROFILE=PowerUserAccess-manas-ai-inc-us-east-2
 
 # for manas flyte setup

@@ -11,4 +11,4 @@ for f in $HOME/.zsh/func/* $HOME/.zsh/func/*/*; do
     fi
 done
 typeset -U fpath
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
