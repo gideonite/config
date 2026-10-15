@@ -33,6 +33,16 @@ preamble when the code already makes the purpose clear.
 Do not use a blanket line limit. Keep measurements, schema traps, compatibility
 constraints, and other facts that the code cannot express.
 
+## SLURM GPU status
+
+To see the GPU usage of the `dev` partition on `sa-control`, run
+`slurm-gpu-status`. It prints one table with a row for each node and a row
+for all GPUs. The output is one snapshot.
+
+Use `--partition <name>` for another partition and `--host <alias>` for
+another control node. Run it instead of your own `sinfo`, `squeue`, and
+`nvidia-smi` commands. Do not stop or change a job to get this information.
+
 ## Machine-specific instructions
 
 Anything specific to one machine — work setup on a dev box, personal

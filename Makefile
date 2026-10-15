@@ -30,6 +30,7 @@ TARGETS = $(patsubst %,$(DEST)/.%,$(CONFIGS))
 
 # Add bin/hub etc
 TARGETS += $(DEST)/bin/hub
+TARGETS += $(DEST)/bin/slurm-gpu-status
 
 PATHOGENBUNDLES= $(patsubst %,vim/bundle/%/.git,$(PATHOGENBUNDLENAMES))
 ZSHBUNDLES = $(patsubst %,zsh/func/%/.git,$(ZSHBUNDLEFILES))
