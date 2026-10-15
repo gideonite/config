@@ -13,6 +13,7 @@ kernel ran. It does not measure throughput.
 """
 
 import argparse
+import shlex
 import subprocess
 import sys
 
@@ -40,14 +41,17 @@ done < "$dir/jobs"
 
 
 def collect(*, host: str, partition: str) -> tuple[dict, list[str]]:
-    """Return ({node: {"job": id, "gpus": [(util, mem, mem_total, power)]}}, errors)."""
-    result = subprocess.run(
-        ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=20", host, "bash", "-s", "--", partition],
-        input=REMOTE_SCRIPT,
-        capture_output=True,
-        text=True,
-        timeout=180,
-    )
+    """Return ({node: {"jobs": [id], "gpus": [(util, mem, mem_total, power)]}}, errors)."""
+    try:
+        result = subprocess.run(
+            ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=20", host, "bash -s -- " + shlex.quote(partition)],
+            input=REMOTE_SCRIPT,
+            capture_output=True,
+            text=True,
+            timeout=180,
+        )
+    except subprocess.TimeoutExpired:
+        sys.exit(f"ssh to {host} timed out after 180 seconds.")
     if result.returncode != 0:
         sys.exit(f"ssh to {host} failed:\n{result.stderr.strip()}")
 
@@ -60,9 +64,21 @@ def collect(*, host: str, partition: str) -> tuple[dict, list[str]]:
         elif line.startswith("ERR|"):
             errors.append(f"job {job}: {line[4:]}")
         elif line.strip():
-            name, util, mem, mem_total, power = [field.strip() for field in line.split(",")]
-            entry = nodes.setdefault(name, {"job": job, "gpus": []})
-            entry["gpus"].append((float(util), float(mem), float(mem_total), float(power)))
+            fields = [field.strip() for field in line.split(",")]
+            if len(fields) != 5:
+                errors.append(f"job {job}: unexpected output: {line}")
+                continue
+            name, *values = fields
+            try:
+                gpu = tuple(float(value) for value in values)
+            except ValueError:
+                # nvidia-smi prints "[N/A]" for a field the GPU does not report.
+                errors.append(f"job {job}: unreadable GPU row: {line}")
+                continue
+            entry = nodes.setdefault(name, {"jobs": [], "gpus": []})
+            if job not in entry["jobs"]:
+                entry["jobs"].append(job)
+            entry["gpus"].append(gpu)
     return nodes, errors
 
 
@@ -110,7 +126,7 @@ def main() -> None:
     all_gpus = []
     for index, (name, entry) in enumerate(sorted(nodes.items()), start=1):
         all_gpus.extend(entry["gpus"])
-        rows.append([str(index), name, entry["job"], *summarize(entry["gpus"])])
+        rows.append([str(index), name, ",".join(entry["jobs"]), *summarize(entry["gpus"])])
 
     header = ["#", "Node", "Job", "GPUs busy", "Avg GPU util", "Avg memory used", "Avg power"]
     total_row = ["", "**All GPUs**", "", *summarize(all_gpus)]
