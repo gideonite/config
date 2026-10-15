@@ -13,8 +13,13 @@ SAVEHIST=7000                     # When to save to the file?
 export SHELL=`which zsh`                 # New shells don't open bash
 export EDITOR=vim                        # Use vim!
 export GOROOT=$HOME/go
-export GOOS=darwin
-export GOARCH=amd64
+if [[ $(uname) == Darwin ]]; then
+    export GOOS=darwin
+    export GOARCH=arm64
+else
+    export GOOS=linux
+    export GOARCH=amd64
+fi
 if [ $(uname) = Linux ]; then 
     alias ls='ls --color=auto'
 else
@@ -226,7 +231,7 @@ alias reload='source ~/.zshrc'   # re-sources this
 alias restartx='sleep 5; startx' # restarts X!
 alias tdA="todo -A"              # displays all todo items
 alias usage='du -hs *'           # nicely displays disk usage of items in pwd
-which htop>/dev/null && alias top='htop' # prettier version of top if it exists
+command -v htop &> /dev/null && alias top='htop'
 alias agj="ag --ignore target"   # silver searcher that ignores the maven target directory.
 alias agjs="ag --ignore-dir perka-client --ignore-dir flatpack"
 alias tarcompress="tar -cvzf"
@@ -475,6 +480,9 @@ bindkey '^p' zmx-select-widget
 if command -v zmx &> /dev/null; then
   eval "$(zmx completions zsh)"
 fi
+if command -v omp &> /dev/null; then
+  eval "$(omp completions zsh)"
+fi
 
 #}}}
 
@@ -487,16 +495,21 @@ fi
 
 # must be at end of file
 
-if [ $(uname) = Darwin ]; then
-    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ $(uname) == Darwin ]]; then
+    [[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] &&
+        source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    [[ -f "$HOME/.local/share/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] &&
+        source "$HOME/.local/share/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 export PATH="$HOME/.local/bin:$PATH"
 
-export PATH="/Users/gideon/.bun/bin:$PATH"
+export PATH="$HOME/.bun/bin:$PATH"
+
+# npm global packages installed without sudo (e.g. codex CLI)
+export PATH="$HOME/.npm-global/bin:$PATH"
 
 # Starship prompt
 #eval "$(starship init zsh)"
@@ -504,40 +517,32 @@ export PATH="/Users/gideon/.bun/bin:$PATH"
 alias lg='lazygit'
 
 # zsh-autosuggestions
-[[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] &&
-  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -f "$HOME/.local/share/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] &&
+    source "$HOME/.local/share/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export AWS_PROFILE=PowerUserAccess-manas-ai-inc-us-east-2
+export AWS_PAGER=""
 
 # for manas flyte setup
 MANAS_DEV_ALIAS=gideon
 
 # Start agent if not already running
-if [[ -o interactive && -z "$SSH_AUTH_SOCK" ]] && command -v ssh-agent >/dev/null; then
+if [[ -o interactive && -z "$SSH_AUTH_SOCK" && -f "$HOME/.ssh/id_rsa" ]] && command -v ssh-agent >/dev/null; then
   eval "$(ssh-agent -s)" >/dev/null
-  [ -f ~/.ssh/id_rsa ] && ssh-add ~/.ssh/id_rsa
+  ssh-add "$HOME/.ssh/id_rsa"
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+if command -v conda &> /dev/null; then
+    __conda_setup="$(conda shell.zsh hook 2> /dev/null)"
+    if [[ $? -eq 0 ]]; then
+        eval "$__conda_setup"
     fi
+    unset __conda_setup
 fi
-unset __conda_setup
-# <<< conda initialize <<<
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/gideon/.lmstudio/bin"
-# End of LM Studio CLI section
+[[ -d "$HOME/.lmstudio/bin" ]] && export PATH="$PATH:$HOME/.lmstudio/bin"
 
 # bun completions
-[ -s "/Users/gideon/.bun/_bun" ] && source "/Users/gideon/.bun/_bun"
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
 # zsh ships an MH-mail completion for `mark` (_mh); override it with files
 (( $+functions[compdef] )) && compdef '_files -g "*.(md|markdown)"' mark
