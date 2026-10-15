@@ -89,6 +89,22 @@ zstyle ':completion::complete:*' use-cache 1 # uses completion cache
 zstyle ':completion::complete:*' cache-path ~/.zshcache
 zstyle ':completion:*' menu select # menu-style completion
 zstyle ':completion:*:functions' ignored-patterns '_*' # no missing completions
+# Complete `ssh d.<TAB>` and `ssh sac.<TAB>` with the zmx session names of the
+# same prefix on gideon-devbox and sa-control. The lookup runs only when the
+# word you type is a prefix of `d.` or `sac.`, or starts with one of them.
+# Each list is cached for 30 seconds so each Tab press does not open an ssh call.
+_zmx_session_hosts() {
+  local prefix=$1 host=$2 tmp
+  [[ -n $PREFIX && ( $prefix == $PREFIX* || $PREFIX == $prefix* ) ]] || return
+  local cache=~/.zshcache/zmx-sessions-$host
+  if [[ ! -f $cache || -n $cache(#qN.ms+30) ]]; then
+    tmp=$(ssh -o BatchMode=yes -o ConnectTimeout=5 $host 'zmx list --short' 2>/dev/null) &&
+      print -r -- ${(F)${(M)${(f)tmp}:#${prefix}*}} >| $cache
+  fi
+  [[ -f $cache ]] && reply=(${(f)"$(<$cache)"})
+}
+zstyle -e ':completion:*:(ssh|scp|sftp):*:hosts' hosts \
+  'reply=($(_zmx_session_hosts d. gideon-devbox; print -l $reply) $(_zmx_session_hosts sac. sa-control; print -l $reply))'
 # }}}
 # Bindkeys {{{
 bindkey -e                       # Use emacs bindings
@@ -321,7 +337,7 @@ c() {
 	fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs open
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -t 0 && -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 export FZF_CTRL_T_OPTS="--bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_R_OPTS="--height 10"
 zle     -N   fzf-file-widget
@@ -460,6 +476,11 @@ fi
 
 #}}}
 
+# Manas
+#alias claude='claude --add-dir ~/projects/engineering-handbook'
+export SCHRODINGER=/opt/schrodinger/suites2026-1
+export FLYTE_API_KEY=$(security find-generic-password -a "$USER" -s flyte-api-key -w)
+
 # must be at end of file
 
 if [ $(uname) = Darwin ]; then
@@ -469,3 +490,67 @@ else
 fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export PATH="$HOME/.local/bin:$PATH"
+
+export PATH="/Users/gideon/.bun/bin:$PATH"
+
+# Starship prompt
+#eval "$(starship init zsh)"
+
+alias lg='lazygit'
+
+# zsh-autosuggestions
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+export AWS_PROFILE=PowerUserAccess-manas-ai-inc-us-east-2
+
+# for manas flyte setup
+MANAS_DEV_ALIAS=gideon
+
+# Start agent if not already running
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_rsa
+fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/gideon/.lmstudio/bin"
+# End of LM Studio CLI section
+
+# Renumber Zellij tabs after any tab is closed (Tab #1, Tab #2, …)
+# Runs async before each prompt so it never blocks typing.
+# Manually renamed tabs (not matching "Tab #N") are preserved.
+function _zellij_renumber_tabs() {
+  [[ -n "$ZELLIJ" ]] || return
+  python3 ~/.config/zellij/renumber-tabs.py > /dev/null 2>&1 &|
+}
+precmd_functions+=(_zellij_renumber_tabs)
+
+
+# bun completions
+[ -s "/Users/gideon/.bun/_bun" ] && source "/Users/gideon/.bun/_bun"
+
+# zsh ships an MH-mail completion for `mark` (_mh); override it with files
+(( $+functions[compdef] )) && compdef '_files -g "*.(md|markdown)"' mark
+
+# Run Claude Code under a separate account/config dir.
+# Override the dir per-invocation:  MYCLAUDE_DIR=~/.claude-work myclaude ...
+function myclaude() {
+  local dir="${MYCLAUDE_DIR:-$HOME/.myclaude}"
+  mkdir -p "$dir"
+  CLAUDE_CONFIG_DIR="$dir" command claude "$@"
+}
