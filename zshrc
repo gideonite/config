@@ -536,16 +536,6 @@ unset __conda_setup
 export PATH="$PATH:/Users/gideon/.lmstudio/bin"
 # End of LM Studio CLI section
 
-# Renumber Zellij tabs after any tab is closed (Tab #1, Tab #2, …)
-# Runs async before each prompt so it never blocks typing.
-# Manually renamed tabs (not matching "Tab #N") are preserved.
-function _zellij_renumber_tabs() {
-  [[ -n "$ZELLIJ" ]] || return
-  python3 ~/.config/zellij/renumber-tabs.py > /dev/null 2>&1 &|
-}
-precmd_functions+=(_zellij_renumber_tabs)
-
-
 # bun completions
 [ -s "/Users/gideon/.bun/_bun" ] && source "/Users/gideon/.bun/_bun"
 
